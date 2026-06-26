@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farmcall</title>
+    <link rel="stylesheet" href="./style/output.css">
+    
+
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-200 flex items-center justify-center p-4">
+
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md">
+
+        <h1 class="text-4xl font-bold text-center mb-2 text-blue-600">
+            Farmcall
+        </h1>
+
+        <p class="text-center text-gray-500 mb-8">
+            Enter complete Details.
+        </p>
+        <!-- Farmer Name -->
+        <div class="mb-5">
+
+    <label class="block text-gray-700 font-semibold mb-2">
+        Farmer Name
+    </label>
+
+    <input 
+        id="farmer_name"
+        type="text"
+        placeholder="Enter Farmer Name"
+        class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+    />
+
+</div>
+
+        <!-- Village / Street -->
+
+        <div class="mb-5">
+
+            <label class="block text-gray-700 font-semibold mb-2">
+                Village / Street
+            </label>
+
+            <input 
+                id="village"
+                type="text"
+                placeholder="Enter Village or Street"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+        </div>
+
+        <!-- Mandal -->
+
+        <div class="mb-5">
+
+            <label class="block text-gray-700 font-semibold mb-2">
+                Mandal
+            </label>
+
+            <input 
+                id="mandal"
+                type="text"
+                placeholder="Enter Mandal"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+        </div>
+
+        <!-- District -->
+
+        <div class="mb-5">
+
+            <label class="block text-gray-700 font-semibold mb-2">
+                District
+            </label>
+
+            <input 
+                id="district"
+                type="text"
+                placeholder="Enter District"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+        </div>
+
+        <!-- Pincode -->
+
+        <div class="mb-5">
+
+            <label class="block text-gray-700 font-semibold mb-2">
+                Pincode
+            </label>
+
+            <input 
+                id="pincode"
+                type="text"
+                placeholder="Enter Pincode"
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+        </div>
+    <!-- phone number -->
+<div class="mb-5">
+
+    <label class="block text-gray-700 font-semibold mb-2">
+        Phone Number
+    </label>
+
+    <input 
+        id="phoneNumber"
+        type="tel"
+        placeholder="Enter Phone Number"
+        class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+    />
+
+</div>
+        <!-- State -->
+
+    <div class="mb-6">
+
+    <label class="block text-gray-700 font-semibold mb-2">
+        State
+    </label>
+
+    <div class="select-wrapper">
+
+        <select id="state" class="custom-select">
+
+            <option value="" selected disabled>Select State</option>
+
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+
+        </select>
+
+        <span class="select-arrow">▼</span>
+
+    </div>
+
+</div>
+<!--Languages-->
+<div class="mb-6">
+
+    <label class="block text-gray-700 font-semibold mb-2">
+        Language
+    </label>
+
+    <div class="select-wrapper">
+
+        <select id="language" class="custom-select">
+
+            <option value="" selected disabled>Select Language</option>
+
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Kannada">Kannada</option>
+            <option value="Malayalam">Malayalam</option>
+            <option value="Tamil">Tamil</option>
+            <option value="Telugu">Telugu</option>
+
+        </select>
+
+        <span class="select-arrow">▼</span>
+
+    </div>
+
+</div>
+
+        <!-- Button -->
+
+        <button 
+            id="submitBtn"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-lg hover:shadow-xl"
+        >
+            Start Calling
+        </button>
+
+        <!-- Output -->
+<div
+    id="outputContainer"
+    class="mt-6 bg-gray-100 p-5 rounded-2xl text-gray-700 min-h-[80px] max-w-full overflow-auto break-words"
+>
+    <p class="text-gray-400 text-center">
+        Final report details will appear here...
+    </p>
+</div>  
+
+    <script type="module" src="app.js"></script>
+
+</body>
+
+</html>

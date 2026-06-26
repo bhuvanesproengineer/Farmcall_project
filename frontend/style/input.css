@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* 1. Style the select box itself */
+.custom-select {
+    width: 100%;
+    padding: 12px 48px 12px 16px; /* Extra padding on the right for the custom arrow */
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background-color: white;
+    color: #374151;
+    cursor: pointer;
+    outline: none;
+
+    /* Remove the default, ugly browser arrow */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    transition: all 0.2s ease;
+}
+
+/* 2. Add a nice blue ring when clicked */
+.custom-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* 3. Wrap the select so we can position the new arrow */
+.select-wrapper {
+    position: relative;
+}
+
+/* 4. Position your custom arrow inside the box */
+.select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 0.8rem;
+    
+    /* CRITICAL: This allows mouse clicks to pass through the arrow 
+       and actually click the <select> box underneath it */
+    pointer-events: none; 
+}
