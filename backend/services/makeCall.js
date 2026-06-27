@@ -26,7 +26,15 @@ export async function makeCall(req, audioUrl) {
                 <Response>
                     <Play>${safeAudioUrl}</Play>
                 </Response>
-            `
+            `,
+            statusCallback: `${process.env.BASE_URL}/api/call-status`,
+        statusCallbackEvent: [
+        "initiated",
+        "ringing",
+        "answered",
+        "completed"
+    ],
+    statusCallbackMethod: "POST"
         });
 
         console.log("Call SID:", call.sid);
