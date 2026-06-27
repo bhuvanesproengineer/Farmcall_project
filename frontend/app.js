@@ -14,8 +14,7 @@ submitBtn.addEventListener("click", async () => {
         const phone_number = document.getElementById("phoneNumber").value.trim();
 <<<<<<< HEAD
 
-        const url = `http://localhost:3000/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
-
+       const url = `https://farmcall-project.onrender.com/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
         outputContainer.innerHTML = `
             <div class="flex flex-col items-center justify-center py-6">
                 <div class="spinner"></div>
