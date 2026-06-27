@@ -12,6 +12,7 @@ submitBtn.addEventListener("click", async () => {
         const language = document.getElementById("language").value.trim();
         const farmer_name = document.getElementById("farmer_name").value.trim();
         const phone_number = document.getElementById("phoneNumber").value.trim();
+<<<<<<< HEAD
 
         const url = `http://localhost:3000/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
 
@@ -28,6 +29,10 @@ submitBtn.addEventListener("click", async () => {
         submitBtn.textContent = "Processing...";
 
         await new Promise(resolve => setTimeout(resolve, 50));
+=======
+      const url = `https://farmcall-project.onrender.com/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
+        console.log("URL:", url);
+>>>>>>> cb6d7f475c5648ad53179ef92269f632036f7ec8
 
         const response = await fetch(url);
 
