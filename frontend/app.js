@@ -8,8 +8,7 @@ submitBtn.addEventListener("click", async () => {
         const language = document.getElementById("language").value.trim();
         const farmer_name = document.getElementById("farmer_name").value.trim();
         const phone_number = document.getElementById("phoneNumber").value.trim();
-        const url = `http://localhost:3000/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
-
+      const url = `https://farmcall-project.onrender.com/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
         console.log("URL:", url);
 
         const response = await fetch(url);
