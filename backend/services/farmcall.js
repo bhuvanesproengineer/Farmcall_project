@@ -60,6 +60,7 @@ export async function getFarmcall(req, res) {
         
         const callResult= await makeCall(req,audioResult.audioUrl);
         // 9. Send Success Response
+        console.log(audioResult.audioUrl);
         return res.status(200).json({
             success: true,
             farmerSummary

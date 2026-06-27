@@ -9,8 +9,9 @@ const client = twilio(
 );
 
 export async function makeCall(req, audioUrl) {
+    console.log("Twilio executed");
     const { phone_number } = req.query;
-
+  
     const phoneNumber = `+91${phone_number}`;
     const safeAudioUrl = audioUrl
     .replace(/&/g, "&amp;")
@@ -32,6 +33,9 @@ export async function makeCall(req, audioUrl) {
         return call.sid;
 
     } catch (error) {
-        console.error(error.message);
-    }
+    console.error("Error Code:", error.code);
+    console.error("Error Message:", error.message);
+    console.error("Status:", error.status);
+    console.error(error);
+}
 }
