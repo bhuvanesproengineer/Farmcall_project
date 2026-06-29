@@ -7,56 +7,61 @@ export async function getShortMsg(
     language = "English"
 ) {
     try {
+const examples = {
+    English: `FarmCall Alert
 
-        const examples = {
-            English: `Rain: Evening
-
+Rain: Evening
 Spray: Morning/Afternoon
 Irrigate: No
 Harvest: No
 Sow: Suitable
 Cover: Required`,
 
-            Telugu: `వర్షం: సాయంత్రం
+    Telugu: `ఫామ్‌కాల్ హెచ్చరిక
 
+వర్షం: సాయంత్రం
 పిచికారీ: ఉదయం/మధ్యాహ్నం
 నీరు: వద్దు
 కోత: వద్దు
 విత్తనం: అనుకూలం
 కవరింగ్: అవసరం`,
 
-            Tamil: `மழை: மாலை
+    Tamil: `ஃபார்ம்கால் எச்சரிக்கை
 
+மழை: மாலை
 தெளிப்பு: காலை/மதியம்
 நீர்ப்பாசனம்: வேண்டாம்
 அறுவடை: வேண்டாம்
 விதைப்பு: ஏற்றது
 மூடுதல்: அவசியம்`,
 
-            Hindi: `बारिश: शाम
+    Hindi: `फार्मकॉल अलर्ट
 
+बारिश: शाम
 छिड़काव: सुबह/दोपहर
 सिंचाई: नहीं
 कटाई: नहीं
 बुवाई: उपयुक्त
 सुरक्षा कवर: आवश्यक`,
 
-            Kannada: `ಮಳೆ: ಸಂಜೆ
+    Kannada: `ಫಾರ್ಮ್‌ಕಾಲ್ ಎಚ್ಚರಿಕೆ
 
+ಮಳೆ: ಸಂಜೆ
 ಸಿಂಪಡಣೆ: ಬೆಳಗ್ಗೆ/ಮಧ್ಯಾಹ್ನ
 ನೀರಾವರಿ: ಬೇಡ
 ಕೊಯ್ಲು: ಬೇಡ
 ಬಿತ್ತನೆ: ಅನುಕೂಲ
 ಮುಚ್ಚುವುದು: ಅಗತ್ಯ`,
 
-            Malayalam: `മഴ: വൈകുന്നേരം
+    Malayalam: `ഫാംകാൾ മുന്നറിയിപ്പ്
 
+മഴ: വൈകുന്നേരം
 തളിക്കൽ: രാവിലെ/ഉച്ച
 ജലസേചനം: വേണ്ട
 വിളവെടുപ്പ്: വേണ്ട
 വിത്തിടൽ: അനുയോജ്യം
 മൂടൽ: ആവശ്യമാണ്`
-        };
+};
 
         const example =
             examples[language] ||
@@ -90,7 +95,6 @@ IMPORTANT RULES:
 - Do NOT explain anything.
 - No greeting.
 - No thank you.
-- First line must be "FarmCall Alert" translated into ${language}.
 - Use exactly the same labels and format as the example.
 - Translate both labels and values into ${language}.
 - Put each field on a new line.
