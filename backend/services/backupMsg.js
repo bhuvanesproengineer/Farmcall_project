@@ -21,15 +21,15 @@ export async function backupMsg(
             duration < 10
         ) {
 const shortSummary =
-    farmerSummary.length > 500
-        ? farmerSummary.substring(0, 500)
+    farmerSummary.length > 200
+        ? farmerSummary.substring(0, 200)
         : farmerSummary;
             console.log("SMS TEXT:");
 console.log(shortSummary);
 console.log("SMS LENGTH:", shortSummary.length);
 
             const message = await client.messages.create({
-                body: "నేడు సాయంత్రం వర్షం వచ్చే అవకాశం ఉంది.పురుగుమందు పిచికారీ వాయిదా వేయండి",
+                body: shortSummary,
                 from: process.env.TWILIO_PHONE_NUMBER,
                 to: phoneNumber
             });
