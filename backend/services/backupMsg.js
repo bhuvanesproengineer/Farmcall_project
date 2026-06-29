@@ -20,11 +20,14 @@ export async function backupMsg(
             status !== "completed" ||
             duration < 10
         ) {
-
+const shortSummary =
+    farmerSummary.length > 500
+        ? farmerSummary.substring(0, 500)
+        : farmerSummary;
             console.log("📩 Sending SMS Backup");
 
             const message = await client.messages.create({
-                body: "Test SMS from FarmCall",
+                body: shortSummary,
                 from: process.env.TWILIO_PHONE_NUMBER,
                 to: phoneNumber
             });
