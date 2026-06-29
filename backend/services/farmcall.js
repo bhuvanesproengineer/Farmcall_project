@@ -7,7 +7,7 @@ import {makeCall} from "./makeCall.js";
 
 export async function getFarmcall(req, res) {
     try {
-        // 1. Extract query parameters
+        // 1. Extrvc act query parameters
         const { village, mandal, district, pincode, state } = req.query;
 
         // 2. Build the address

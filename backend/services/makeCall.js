@@ -17,6 +17,10 @@ export async function makeCall(req, audioUrl) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+    console.log("BASE_URL:", process.env.BASE_URL);
+console.log("Callback URL:", `${process.env.BASE_URL}/api/call-status`);
+
+
     
     try {
         const call = await client.calls.create({
@@ -28,12 +32,7 @@ export async function makeCall(req, audioUrl) {
                 </Response>
             `,
             statusCallback: `${process.env.BASE_URL}/api/call-status`,
-        statusCallbackEvent: [
-        "initiated",
-        "ringing",
-        "answered",
-        "completed"
-    ],
+      statusCallbackEvent: ["completed"],
     statusCallbackMethod: "POST"
         });
 

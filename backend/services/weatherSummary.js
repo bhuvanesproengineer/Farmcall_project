@@ -275,10 +275,10 @@ Sowing Advice: ${sowing}
 
             const intensity = intervals[i].values.rainIntensity ?? 0;
             
+            
             // OPTIMIZATION 2: Skip expensive Date parsing if there is no rain
             if (intensity < 0.1) continue;
-
-            // --- IST TIME CONVERSION ---
+     // --- IST TIME CONVERSION ---
             const utcTime = new Date(intervals[i].startTime);
             
             // Shift the UTC time forward by 5 hours and 30 minutes

@@ -14,11 +14,18 @@ app.use(express.json());
 app.post("/api/call-status", (req, res) => {
 
     console.log("===== TWILIO CALLBACK =====");
-    console.log(req.body);
 
-    console.log("Call SID:", req.body.CallSid);
-    console.log("Status:", req.body.CallStatus);
-    console.log("Duration:", req.body.CallDuration);
+    const status = req.body.CallStatus;
+    const duration = Number(req.body.CallDuration || 0);
+
+    console.log("Status:", status);
+    console.log("Duration:", duration);
+
+    if (status === "completed" && duration > 20) {
+        console.log("✅ Farmer listened to the message");
+    } else {
+        console.log("📩 Send SMS backup");
+    }
 
     res.sendStatus(200);
 });
