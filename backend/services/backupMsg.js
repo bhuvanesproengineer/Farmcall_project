@@ -25,6 +25,8 @@ const shortSummary =
         ? farmerSummary.substring(0, 500)
         : farmerSummary;
             console.log("📩 Sending SMS Backup");
+            console.log("SMS Length:", shortSummary.length);
+console.log("Phone Number:", phoneNumber);
 
             const message = await client.messages.create({
                 body: shortSummary,
