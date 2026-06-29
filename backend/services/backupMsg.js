@@ -1,5 +1,6 @@
 import twilio from "twilio";
 import dotenv from "dotenv";
+import { getShortMsg } from "./getShortMsg.js";
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ export async function backupMsg(
     status,
     duration,
     phoneNumber,
-    farmerSummary
+    farmerSummary,language
 ) {
     try {
 
@@ -20,10 +21,8 @@ export async function backupMsg(
             status !== "completed" ||
             duration < 10
         ) {
-const shortSummary =
-    farmerSummary.length > 160
-        ? farmerSummary.substring(0, 160)
-        : farmerSummary;
+            console.log("Generating SMS Summary...");
+const shortSummary = await getShortMsg(farmerSummary,language);
             console.log("SMS TEXT:");
 console.log(shortSummary);
 console.log("SMS LENGTH:", shortSummary.length);

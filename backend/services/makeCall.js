@@ -1,6 +1,7 @@
 import twilio from "twilio";
 import dotenv from "dotenv";
 
+
 dotenv.config();
 
 const client = twilio(
@@ -11,7 +12,7 @@ const client = twilio(
 // Store call data temporarily
 export const callStore = {};
 
-export async function makeCall(req, audioUrl, farmerSummary) {
+export async function makeCall(req, audioUrl, farmerSummary,language) {
 
     console.log("Twilio executed");
 
@@ -48,7 +49,8 @@ export async function makeCall(req, audioUrl, farmerSummary) {
         // Store required data for callback
         callStore[call.sid] = {
             phoneNumber,
-            farmerSummary
+            farmerSummary,
+            language
         };
 
         console.log("Call SID:", call.sid);

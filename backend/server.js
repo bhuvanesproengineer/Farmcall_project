@@ -28,7 +28,8 @@ app.post("/api/call-status", async (req, res) => {
             status,
             duration,
             callData.phoneNumber,
-            callData.farmerSummary
+            callData.farmerSummary,
+            callData.language
         );
     }
 
