@@ -95,6 +95,7 @@ IMPORTANT RULES:
 - No greeting.
 - No thank you.
 - Use exactly the same labels and format as the example.
+- The entire SMS including the heading must be less than 160 characters.
 - Translate both labels and values into ${language}.
 - Put each field on a new line.
 - Return only the SMS content.
