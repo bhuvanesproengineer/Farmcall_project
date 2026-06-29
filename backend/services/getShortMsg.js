@@ -8,7 +8,7 @@ export async function getShortMsg(
 ) {
     try {
 const examples = {
-    English: `FarmCall Alert
+    English: `FarmCall Weather Alert
 
 Rain: Evening
 Spray: Morning/Afternoon
@@ -17,7 +17,7 @@ Harvest: No
 Sow: Suitable
 Cover: Required`,
 
-    Telugu: `ఫామ్‌కాల్ హెచ్చరిక
+    Telugu: `ఫామ్‌కాల్ వాతావరణ హెచ్చరిక
 
 వర్షం: సాయంత్రం
 పిచికారీ: ఉదయం/మధ్యాహ్నం
@@ -26,7 +26,7 @@ Cover: Required`,
 విత్తనం: అనుకూలం
 కవరింగ్: అవసరం`,
 
-    Tamil: `ஃபார்ம்கால் எச்சரிக்கை
+    Tamil: `ஃபார்ம்கால் வானிலை எச்சரிக்கை
 
 மழை: மாலை
 தெளிப்பு: காலை/மதியம்
@@ -35,7 +35,7 @@ Cover: Required`,
 விதைப்பு: ஏற்றது
 மூடுதல்: அவசியம்`,
 
-    Hindi: `फार्मकॉल अलर्ट
+    Hindi: `फार्मकॉल मौसम अलर्ट
 
 बारिश: शाम
 छिड़काव: सुबह/दोपहर
@@ -44,7 +44,7 @@ Cover: Required`,
 बुवाई: उपयुक्त
 सुरक्षा कवर: आवश्यक`,
 
-    Kannada: `ಫಾರ್ಮ್‌ಕಾಲ್ ಎಚ್ಚರಿಕೆ
+    Kannada: `ಫಾರ್ಮ್‌ಕಾಲ್ ಹವಾಮಾನ ಎಚ್ಚರಿಕೆ
 
 ಮಳೆ: ಸಂಜೆ
 ಸಿಂಪಡಣೆ: ಬೆಳಗ್ಗೆ/ಮಧ್ಯಾಹ್ನ
@@ -53,7 +53,7 @@ Cover: Required`,
 ಬಿತ್ತನೆ: ಅನುಕೂಲ
 ಮುಚ್ಚುವುದು: ಅಗತ್ಯ`,
 
-    Malayalam: `ഫാംകാൾ മുന്നറിയിപ്പ്
+    Malayalam: `ഫാംകാൾ കാലാവസ്ഥ മുന്നറിയിപ്പ്
 
 മഴ: വൈകുന്നേരം
 തളിക്കൽ: രാവിലെ/ഉച്ച
@@ -62,7 +62,6 @@ Cover: Required`,
 വിത്തിടൽ: അനുയോജ്യം
 മൂടൽ: ആവശ്യമാണ്`
 };
-
         const example =
             examples[language] ||
             examples["English"];
