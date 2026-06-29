@@ -58,9 +58,11 @@ export async function getFarmcall(req, res) {
         const audioResult=await textToSpeech(farmerSummary);
         
         
-        const callResult= await makeCall(req,audioResult.audioUrl);
-        // 9. Send Success Response
-        console.log(audioResult.audioUrl);
+       const callResult = await makeCall(
+    req,
+    audioResult.audioUrl,
+    farmerSummary
+);
         return res.status(200).json({
             success: true,
             farmerSummary
