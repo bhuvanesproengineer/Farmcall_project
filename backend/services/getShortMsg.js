@@ -82,24 +82,19 @@ Required fields:
 5. Sow
 6. Cover
 
+
 IMPORTANT RULES:
 - Generate output ONLY in ${language}.
+- Only extract decisions already present in the advisory.
 - Do NOT generate new advice.
-- Do NOT analyze weather again.
-- Only summarize decisions already present.
+- Do NOT explain anything.
 - No greeting.
 - No thank you.
-- No explanations.
-- No paragraphs.
-- Keep the message very short.
-- Maximum 160 characters if possible.
-- Return ONLY the structured SMS.
-IMPORTANT FORMAT RULES:
-- First line must be: FarmCall Alert
+- First line must be "FarmCall Alert" translated into ${language}.
+- Use exactly the same labels and format as the example.
+- Translate both labels and values into ${language}.
 - Put each field on a new line.
-- Do not put all fields on one line.
-- Preserve line breaks exactly like the example.
-- Return plain text only.
+- Return only the SMS content.
 
 REFERENCE FORMAT:
 ${example}
