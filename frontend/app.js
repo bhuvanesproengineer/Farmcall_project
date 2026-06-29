@@ -13,7 +13,8 @@ submitBtn.addEventListener("click", async () => {
         const farmer_name = document.getElementById("farmer_name").value.trim();
         const phone_number = document.getElementById("phoneNumber").value.trim();
 
-const url = `https://farmcall-backend.onrender.com/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
+const url = `http://localhost:3000/farmcall?village=${encodeURIComponent(village)}&mandal=${encodeURIComponent(mandal)}&district=${encodeURIComponent(district)}&pincode=${encodeURIComponent(pincode)}&state=${encodeURIComponent(state)}&language=${encodeURIComponent(language)}&farmer_name=${encodeURIComponent(farmer_name)}&phone_number=${encodeURIComponent(phone_number)}`;
+
         outputContainer.innerHTML = `
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
                 <div class="spinner"></div>
