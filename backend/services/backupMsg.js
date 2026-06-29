@@ -22,7 +22,7 @@ export async function backupMsg(
         ) {
 const shortSummary =
     farmerSummary.length > 500
-        ? farmerSummary.substring(0, 500)
+        ? farmerSummary.substring(0, 100)
         : farmerSummary;
             console.log("📩 Sending SMS Backup");
             console.log("SMS Length:", shortSummary.length);
