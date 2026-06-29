@@ -94,6 +94,12 @@ IMPORTANT RULES:
 - Keep the message very short.
 - Maximum 160 characters if possible.
 - Return ONLY the structured SMS.
+IMPORTANT FORMAT RULES:
+- First line must be: FarmCall Alert
+- Put each field on a new line.
+- Do not put all fields on one line.
+- Preserve line breaks exactly like the example.
+- Return plain text only.
 
 REFERENCE FORMAT:
 ${example}
