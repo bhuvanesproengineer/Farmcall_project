@@ -24,7 +24,7 @@ export async function backupMsg(
             console.log("📩 Sending SMS Backup");
 
             const message = await client.messages.create({
-                body: farmerSummary,
+                body: "Test SMS from FarmCall",
                 from: process.env.TWILIO_PHONE_NUMBER,
                 to: phoneNumber
             });
