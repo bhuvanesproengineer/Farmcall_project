@@ -21,8 +21,8 @@ export async function backupMsg(
             duration < 10
         ) {
 const shortSummary =
-    farmerSummary.length > 180
-        ? farmerSummary.substring(0, 180)
+    farmerSummary.length > 160
+        ? farmerSummary.substring(0, 160)
         : farmerSummary;
             console.log("SMS TEXT:");
 console.log(shortSummary);
