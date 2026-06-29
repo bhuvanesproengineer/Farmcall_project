@@ -22,11 +22,11 @@ export async function backupMsg(
         ) {
 const shortSummary =
     farmerSummary.length > 500
-        ? farmerSummary.substring(0, 100)
+        ? farmerSummary.substring(0, 500)
         : farmerSummary;
-            console.log("📩 Sending SMS Backup");
-            console.log("SMS Length:", shortSummary.length);
-console.log("Phone Number:", phoneNumber);
+            console.log("SMS TEXT:");
+console.log(shortSummary);
+console.log("SMS LENGTH:", shortSummary.length);
 
             const message = await client.messages.create({
                 body: shortSummary,
