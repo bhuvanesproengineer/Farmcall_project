@@ -29,7 +29,7 @@ console.log(shortSummary);
 console.log("SMS LENGTH:", shortSummary.length);
 
             const message = await client.messages.create({
-                body: shortSummary,
+                body: "నేడు సాయంత్రం వర్షం వచ్చే అవకాశం ఉంది.పురుగుమందు పిచికారీ వాయిదా వేయండి",
                 from: process.env.TWILIO_PHONE_NUMBER,
                 to: phoneNumber
             });
