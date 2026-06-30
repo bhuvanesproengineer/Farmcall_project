@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmCall Call History</title>
+    <link rel="stylesheet" href="./call_logs.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+    <a href="../index.html" class="back-btn">
+        ← Back
+    </a>
+
+    <h1>📞 FarmCall Call History</h1>
+
+    <button onclick="fetchLogs()">
+        Refresh Logs
+    </button>
+
+</div>
+
+        <p id="lastUpdated">
+            Last Updated: --
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Farmer Name</th>
+                    <th>Phone Number</th>
+                    <th>Call Status</th>
+                    <th>Duration</th>
+                    <th>SMS Status</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody">
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <script src="./call_logs.js"></script>
+
+</body>
+</html>
