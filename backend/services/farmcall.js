@@ -64,10 +64,10 @@ export async function getFarmcall(req, res) {
     audioResult.audioUrl,
     farmerSummary,language,farmer_name
 );
-        return res.status(200).json({
-            success: true,
+        return res.status(200).json(
+            
             farmerSummary
-        });
+        );
 
     } catch (error) {
         // Maximum traceability for the controller

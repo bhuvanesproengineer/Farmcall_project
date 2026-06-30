@@ -7,7 +7,15 @@ async function fetchLogs() {
 
         const response = await fetch(API_URL);
 
+        if (!response.ok) {
+            throw new Error(
+                `HTTP Error: ${response.status}`
+            );
+        }
+
         const result = await response.json();
+
+        console.log("API Result:", result);
 
         const logs = result.data || [];
 
@@ -22,7 +30,33 @@ async function fetchLogs() {
 
         tableBody.innerHTML = "";
 
+        if (logs.length === 0) {
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        No call logs found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
         logs.forEach(log => {
+
+      const formattedDate = new Date(
+    log.created_at + " UTC"
+).toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true
+});
 
             const row = document.createElement("tr");
 
@@ -32,7 +66,7 @@ async function fetchLogs() {
                 <td>${log.call_status}</td>
                 <td>${log.call_duration} sec</td>
                 <td>${log.sms_status}</td>
-                <td>${log.created_at}</td>
+                <td>${formattedDate}</td>
             `;
 
             tableBody.appendChild(row);
@@ -42,7 +76,12 @@ async function fetchLogs() {
         document.getElementById("lastUpdated")
             .innerText =
             "Last Updated: " +
-            new Date().toLocaleTimeString();
+            new Date().toLocaleString("en-IN", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true
+            });
 
     } catch (error) {
 
@@ -51,10 +90,20 @@ async function fetchLogs() {
             error
         );
 
+        const tableBody =
+            document.getElementById("tableBody");
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    Failed to load call logs.
+                </td>
+            </tr>
+        `;
     }
 }
 
-/* First Load */
+/* Initial Load */
 fetchLogs();
 
 /* Auto Refresh Every 30 Seconds */
