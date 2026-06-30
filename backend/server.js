@@ -52,7 +52,7 @@ app.post("/api/call-status", async (req, res) => {
             console.error("SMS Error:", error);
             smsStatus = "failed";
         }
-
+console.log("SMS STATUS RETURNED:", smsStatus);
         await storeCallLog(
             callData.farmerName,
             callData.phoneNumber,
