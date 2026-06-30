@@ -35,15 +35,17 @@ app.post("/api/call-status", async (req, res) => {
 
         try {
 
-            await backupMsg(
-                status,
-                duration,
-                callData.phoneNumber,
-                callData.farmerSummary,
-                callData.language
-            );
+         smsStatus = await backupMsg(
+    status,
+    duration,
+    callData.phoneNumber,
+    callData.farmerSummary,
+    callData.language
+);
 
-            smsStatus = "delivered";
+
+
+        
 
         } catch (error) {
 
