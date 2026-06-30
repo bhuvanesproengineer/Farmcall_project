@@ -8,7 +8,7 @@ import {makeCall} from "./makeCall.js";
 export async function getFarmcall(req, res) {
     try {
         // 1. Extrvc act query parameters
-        const { village, mandal, district, pincode, state,language } = req.query;
+        const { village, mandal, district, pincode, state,language,farmer_name } = req.query;
         
 
         // 2. Build the address
@@ -62,7 +62,7 @@ export async function getFarmcall(req, res) {
        const callResult = await makeCall(
     req,
     audioResult.audioUrl,
-    farmerSummary,language
+    farmerSummary,language,farmer_name
 );
         return res.status(200).json({
             success: true,

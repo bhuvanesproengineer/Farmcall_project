@@ -1,19 +1,9 @@
-import twilio from "twilio";
-import dotenv from "dotenv";
-import { getShortMsg } from "./getShortMsg.js";
-
-dotenv.config();
-
-const client = twilio(
-    process.env.TWILIO_ACCOUNT_SID,
-    process.env.TWILIO_AUTH_TOKEN
-);
-
 export async function backupMsg(
     status,
     duration,
     phoneNumber,
-    farmerSummary,language
+    farmerSummary,
+    language
 ) {
     try {
 
@@ -21,41 +11,27 @@ export async function backupMsg(
             status !== "completed" ||
             duration < 10
         ) {
-            console.log("Generating SMS Summary...");
-const shortSummary = await getShortMsg(farmerSummary,language);
-            console.log("SMS TEXT:");
-console.log(shortSummary);
-console.log("SMS LENGTH:", shortSummary.length);
 
-            const message = await client.messages.create({
+            const shortSummary = await getShortMsg(
+                farmerSummary,
+                language
+            );
+
+            await client.messages.create({
                 body: shortSummary,
                 from: process.env.TWILIO_PHONE_NUMBER,
                 to: phoneNumber
             });
 
-            console.log("✅ SMS Sent");
-            console.log("Message SID:", message.sid);
-
-            return {
-                success: true,
-                smsSent: true
-            };
+            return "delivered";
         }
 
-        console.log("✅ No SMS Required");
-
-        return {
-            success: true,
-            smsSent: false
-        };
+        return "not_required";
 
     } catch (error) {
 
         console.error("SMS Error:", error);
 
-        return {
-            success: false,
-            smsSent: false
-        };
+        return "failed";
     }
 }

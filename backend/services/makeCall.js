@@ -12,7 +12,7 @@ const client = twilio(
 // Store call data temporarily
 export const callStore = {};
 
-export async function makeCall(req, audioUrl, farmerSummary,language) {
+export async function makeCall(req, audioUrl, farmerSummary,language,farmerName) {
 
     console.log("Twilio executed");
 
@@ -50,7 +50,8 @@ export async function makeCall(req, audioUrl, farmerSummary,language) {
         callStore[call.sid] = {
             phoneNumber,
             farmerSummary,
-            language
+            language,
+            farmerName
         };
 
         console.log("Call SID:", call.sid);
