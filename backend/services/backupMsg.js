@@ -1,3 +1,13 @@
+import twilio from "twilio";
+import dotenv from "dotenv";
+import { getShortMsg } from "./getShortMsg.js";
+
+dotenv.config();
+
+const client = twilio(
+    process.env.TWILIO_ACCOUNT_SID,
+    process.env.TWILIO_AUTH_TOKEN
+);
 export async function backupMsg(
     status,
     duration,

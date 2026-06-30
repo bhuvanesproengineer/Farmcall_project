@@ -25,11 +25,8 @@ export async function makeCall(req, audioUrl, farmerSummary,language,farmerName)
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-    console.log("BASE_URL:", process.env.BASE_URL);
-    console.log(
-        "Callback URL:",
-        `${process.env.BASE_URL}/api/call-status`
-    );
+   
+  
 
     try {
 
@@ -54,8 +51,7 @@ export async function makeCall(req, audioUrl, farmerSummary,language,farmerName)
             farmerName
         };
 
-        console.log("Call SID:", call.sid);
-
+        
         return {
             success: true,
             callSid: call.sid
