@@ -14,7 +14,7 @@ export const callStore = {};
 
 export async function makeCall(req, audioUrl, farmerSummary,language,farmerName) {
 
-    console.log("Twilio executed");
+   
 
     const { phone_number } = req.query;
 

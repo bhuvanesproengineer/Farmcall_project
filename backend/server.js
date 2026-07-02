@@ -5,17 +5,63 @@ import dotenv from 'dotenv';
 import { backupMsg } from "./services/backupMsg.js";
 import { callStore } from "./services/makeCall.js";
 import {  storeCallLog,  getCallLogs } from "./database/db.js";
+import { storeFarmerData } from "./database/db.js";
+import { getAllFarmers } from "./database/db.js";
 
 
 dotenv.config();
 
 const app = express();
-
+    
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.post("/call-all-farmers", async (req, res) => {
 
+    const farmers = await getAllFarmers();
 
+    startCallingQueue(farmers);
+
+    res.status(200).json({
+        message: "Calling process started"
+    });
+
+});
+app.post("/register_farmer", async (req, res) => {
+    
+    storeFarmerData(req.body)
+        .then(() => {
+            res.status(200).json({ message: "Farmer data stored successfully" });
+        })
+        .catch((error) => {
+            console.error("Error storing farmer data:", error);
+            res.status(500).json({ message: "Error storing farmer data" });
+        });
+
+})
+
+app.get("/get-all-farmers", async (req, res) => {
+
+    try {
+
+        const farmers = await getAllFarmers();
+
+        res.json({
+            success: true,
+            data: farmers
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+
+}); 
 app.post("/api/call-status", async (req, res) => {
 
     try {
@@ -49,10 +95,10 @@ app.post("/api/call-status", async (req, res) => {
 
         } catch (error) {
 
-            console.error("SMS Error:", error);
+            
             smsStatus = "failed";
         }
-console.log("SMS STATUS RETURNED:", smsStatus);
+
         await storeCallLog(
             callData.farmerName,
             callData.phoneNumber,

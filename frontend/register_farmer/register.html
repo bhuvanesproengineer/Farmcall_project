@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Farmcall</title>
-    <link rel="stylesheet" href="./style/output.css">
+    <link rel="stylesheet" href="../style/output.css">
     
 
 </head>
@@ -17,36 +17,18 @@
     
     <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md">
         
- <div class="fixed top-5 right-5 flex flex-col gap-3 z-50">
-    
-    <a
-        href="./call_logs/call_logs.html"
-        class="bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white px-5 py-3 rounded-xl shadow-lg font-semibold transition duration-300"
-    >
-        📞 Call History
-    </a>
-
-    <a
-        href="./register_farmer/register.html"
-        class="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white px-5 py-3 rounded-xl shadow-lg font-semibold transition duration-300"
-    >
-        👨‍🌾 Register Farmer
-    </a>
-
-    <button
-        id="callAllBtn"
-       class="bg-white text-green-600 border-2 border-green-600 hover:bg-green-600 hover:text-white px-5 py-3 rounded-xl shadow-lg font-semibold transition duration-300"
-     >
-        📢 Call All Farmers
-    </button>
-
-</div>
-        <h1 class="text-4xl font-bold text-center mb-2 text-blue-600 ">
-            Farmcall
+<a
+    href="../index.html"
+    class="fixed top-5 left-5 bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white px-5 py-3 rounded-xl shadow-lg font-semibold transition duration-300 z-50"
+>
+    ← Back
+</a>
+        <h1 class="text-4xl font-bold text-center mb-2 text-blue-600">
+            Farmcall Registration
         </h1>
 
         <p class="text-center text-gray-500 mb-8">
-            Live Demo
+            Enter complete Details.
         </p>
         <!-- Farmer Name -->
         <div class="mb-5">
@@ -227,25 +209,18 @@
         <!-- Button -->
 
         <button 
-            id="submitBtn"
+            id="registerBtn"
             class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-lg hover:shadow-xl"
         >
-            Start Calling
+            Register Farmer
         </button>
 
         <!-- Output -->
-<div
-    id="outputContainer"
-    class="mt-6 bg-gray-100 p-5 rounded-2xl text-gray-700 min-h-[80px] max-w-full overflow-auto break-words"
->
-    <p class="text-gray-400 text-center">
-        Final report details will appear here...
-    </p>
 
-</div>  
+         
 
 
-    <script type="module" src="app.js"></script>
+    <script type="module" src="register.js"></script>
 
 </body>
 

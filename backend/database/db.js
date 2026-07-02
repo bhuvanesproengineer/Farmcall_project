@@ -7,6 +7,7 @@ export async function connectDB() {
         filename: "./database/farmcall.db",
         driver: sqlite3.Database
     });
+   
 
     await db.exec(`
         CREATE TABLE IF NOT EXISTS farmcall_call_logs (
@@ -19,7 +20,19 @@ export async function connectDB() {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
     `);
-
+ await db.exec(`
+        CREATE TABLE IF NOT EXISTS farmcall_farmer_data (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            village TEXT,
+            mandal TEXT,
+            district TEXT,
+            pincode TEXT,
+            state TEXT,
+            language TEXT,
+            farmer_name TEXT,
+            phone_number TEXT
+        );
+    `);
     return db;
 }
 
@@ -65,4 +78,45 @@ export async function getCallLogs() {
     `);
 
     return logs;
+}
+export async function storeFarmerData(farmerData) {
+    const { village, mandal, district, pincode, state, language, farmer_name, phone_number } = farmerData;
+    const db = await connectDB();
+   const result = await db.run(
+        `
+        INSERT INTO farmcall_farmer_data
+        (
+            village,
+            mandal,
+            district,
+            pincode,
+            state,
+            language,
+            farmer_name,
+            phone_number
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `,
+        [
+            farmerData.village,
+            farmerData.mandal,
+            farmerData.district,
+            farmerData.pincode,
+            farmerData.state,
+            farmerData.language,
+            farmerData.farmer_name,
+            farmerData.phone_number
+        ]
+    );
+    const farmers = await db.all(
+    `SELECT * FROM farmcall_farmer_data`
+);
+}
+
+export const getAllFarmers = async () => {
+    const db = await connectDB();
+    const farmers = await db.all(
+        `SELECT * FROM farmcall_farmer_data`
+    );
+    return farmers;
 }
