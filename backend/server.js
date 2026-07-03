@@ -21,7 +21,7 @@ app.post("/call-all-farmers", async (req, res) => {
     const farmers = await getAllFarmers();
     console.log(farmers);
 
-    await getFarmcall(farmers);
+    await callAllFarmers(farmers);
 
     res.status(200).json({
         message: "Calling process started"
