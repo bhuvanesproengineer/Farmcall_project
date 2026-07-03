@@ -29,6 +29,9 @@ app.post("/call-all-farmers", async (req, res) => {
     });
 
 });
+app.get("/health", (req, res) => {
+    res.status(200).send("OK");
+});
 app.post("/register_farmer", async (req, res) => {
     
     storeFarmerData(req.body)
