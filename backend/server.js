@@ -19,8 +19,9 @@ app.use(express.json());
 app.post("/call-all-farmers", async (req, res) => {
 
     const farmers = await getAllFarmers();
+    console.log(farmers);
 
-    startCallingQueue(farmers);
+    await getFarmcall(farmers);
 
     res.status(200).json({
         message: "Calling process started"
