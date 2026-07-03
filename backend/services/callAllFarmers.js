@@ -1,4 +1,4 @@
-import {getFarmcall} from '../farmcall.js';
+import {getFarmcall} from './farmcall.js';
 
 export const callAllFarmers = async (farmers) => {
    for (const farmer of farmers) {
