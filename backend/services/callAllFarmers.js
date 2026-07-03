@@ -13,6 +13,6 @@ export const callAllFarmers = async (farmers) => {
         })
     };
 
-    await getFarmcall(req, res);
+     getFarmcall(req, res);
 }
 }
