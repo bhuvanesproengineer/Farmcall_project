@@ -1,18 +1,19 @@
 import {getFarmcall} from './farmcall.js';
 
 export const callAllFarmers = async (farmers) => {
-   for (const farmer of farmers) {
+    const promises = [];
 
-    const req = {
-        query: farmer
-    };
+    for (const farmer of farmers) {
+        const req = { query: farmer };
 
-    const res = {
-        status: () => ({
-            json: () => {}
-        })
-    };
+        const res = {
+            status: () => ({
+                json: () => {}
+            })
+        };
 
-     getFarmcall(req, res);
-}
+        promises.push(getFarmcall(req, res));
+    }
+
+    await Promise.all(promises);
 }
