@@ -1,14 +1,24 @@
-import express from 'express';
-import cors from 'cors';
-import { getFarmcall } from './services/farmcall.js';
-import dotenv from 'dotenv';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import cron from "node-cron";
+import axios from "axios";
+
+import { getFarmcall } from "./services/farmcall.js";
 import { backupMsg } from "./services/backupMsg.js";
 import { callStore } from "./services/makeCall.js";
-import {  storeCallLog,  getCallLogs } from "./database/db.js";
-import { storeFarmerData } from "./database/db.js";
-import { getAllFarmers } from "./database/db.js";
 import { callAllFarmers } from "./services/callAllFarmers.js";
 
+import {
+    storeCallLog,
+    getCallLogs,
+    storeFarmerData,
+    getAllFarmers,
+    startAutomation,
+    stopAutomation,
+    getAutomation
+} from "./database/db.js";
 
 dotenv.config();
 
@@ -27,6 +37,119 @@ app.post("/call-all-farmers", async (req, res) => {
     res.status(200).json({
         message: "Calling process started"
     });
+
+});
+
+
+cron.schedule("* * * * *", async () => {
+
+    try {
+        console.log("Cron running...");
+
+        const automation = await getAutomation();
+
+        if (!automation || !automation.is_active) {
+            return;
+        }
+
+        const currentTime = new Date().toLocaleTimeString(
+            "en-IN",
+            {
+                timeZone: "Asia/Kolkata",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            }
+        );
+
+        if (currentTime === automation.call_time) {
+
+            const farmers = await getAllFarmers();
+            await callAllFarmers(farmers);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+});
+
+console.log("Automation Scheduler Started");
+
+
+app.post("/start-automation", async (req, res) => {
+
+    try {
+
+        const { callTime } = req.body;
+
+        await startAutomation(callTime);
+
+        res.status(200).json({
+            success: true,
+            message: "Automation started",
+            callTime
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to start automation"
+        });
+
+    }
+
+});
+app.get("/automation-status", async (req, res) => {
+
+    try {
+
+        const automation = await getAutomation();
+
+        res.status(200).json({
+            success: true,
+            data: automation
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch automation status"
+        });
+
+    }
+
+});
+app.post("/stop-automation", async (req, res) => {
+
+    try {
+
+        await stopAutomation();
+
+        res.status(200).json({
+            success: true,
+            message: "Automation stopped"
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to stop automation"
+        });
+
+    }
 
 });
 app.get("/health", (req, res) => {
