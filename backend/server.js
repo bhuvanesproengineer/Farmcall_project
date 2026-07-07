@@ -10,17 +10,18 @@ import { backupMsg } from "./services/backupMsg.js";
 import { callStore } from "./services/makeCall.js";
 import { callAllFarmers } from "./services/callAllFarmers.js";
 
-import {
-    storeCallLog,
-    getCallLogs,
-    storeFarmerData,
-    getAllFarmers,
-    startAutomation,
-    stopAutomation,
-    getAutomation
+import connectDB, {
+  storeCallLog,
+  getCallLogs,
+  storeFarmerData,
+  getAllFarmers,
+  startAutomation,
+  stopAutomation,
+  getAutomation
 } from "./database/db.js";
 
 dotenv.config();
+await connectDB();
 
 const app = express();
     
