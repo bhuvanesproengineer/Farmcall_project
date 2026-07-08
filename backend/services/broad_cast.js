@@ -82,7 +82,7 @@ const VOICE_MAP = {
 export async function textToSpeech(summary, language = "english") {
 
     const config =
-        VOICE_MAP[language.toLowerCase()] || VOICE_MAP.english;
+    VOICE_MAP[language.trim().toLowerCase()] || VOICE_MAP.english;
 
     try {
 
