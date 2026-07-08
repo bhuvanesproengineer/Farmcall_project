@@ -13,7 +13,7 @@ export async function backupMsg(
     duration,
     phoneNumber,
     farmerSummary,
-    language
+    language,callType
 ) {
     try {
 
@@ -24,7 +24,7 @@ export async function backupMsg(
 
             const shortSummary = await getShortMsg(
                 farmerSummary,
-                language
+                language,callType
             );
 
             await client.messages.create({
