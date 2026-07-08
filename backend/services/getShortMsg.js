@@ -4,7 +4,7 @@ dotenv.config();
 
 export async function getShortMsg(
     farmerSummary,
-    language = "English"
+    language = "English",callType
 ) {
     try {
 const examples = {
@@ -65,8 +65,10 @@ Cover: Required`,
         const example =
             examples[language] ||
             examples["English"];
+       
 
-        const prompt = `
+
+        let prompt = `
 You are FarmCall.
 
 LANGUAGE:
@@ -102,7 +104,32 @@ IMPORTANT RULES:
 
 REFERENCE FORMAT:
 ${example}
+
 `;
+const alert_prompt = `
+You are FarmCall.
+
+LANGUAGE:
+${language}
+
+ALERT MESSAGE:
+${message}
+
+TASK:
+Convert the alert message into a short SMS.
+
+IMPORTANT RULES:
+- Generate the SMS only in ${language}.
+- Preserve the original meaning.
+- Do not add or remove important information.
+- Do not create new instructions.
+- Keep the message clear and easy to understand.
+- Maximum length: 160 characters.
+- Return only the final SMS.
+`;
+if (callType === "broadCast") {
+    prompt = alert_prompt;
+}
 
         const response = await fetch(
             "https://openrouter.ai/api/v1/chat/completions",

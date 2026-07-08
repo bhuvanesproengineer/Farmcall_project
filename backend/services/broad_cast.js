@@ -146,7 +146,7 @@ export const createBroadcast = async (req, res) => {
                         audioUrl,
                         translatedMessage,
                         farmer.language,
-                        farmer.farmer_name
+                        farmer.farmer_name,"broadCast"
                     );
 
                 })()

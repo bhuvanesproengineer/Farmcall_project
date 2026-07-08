@@ -62,7 +62,7 @@ export async function getFarmcall(req, res) {
        const callResult = await makeCall(
     phone_number,
     audioResult.audioUrl,
-    farmerSummary,language,farmer_name
+    farmerSummary,language,farmer_name,"weather"
 );
         return res.status(200).json(
             
