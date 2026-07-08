@@ -53,30 +53,36 @@ Return only the final spoken message.
 import axios from "axios";
 
 const VOICE_MAP = {
-    english: {
-        locale: "en-IN",
-        voiceId: "en-IN-priya"
-    },
-    hindi: {
-        locale: "hi-IN",
-        voiceId: "Aditi"
-    },
-    tamil: {
-        locale: "ta-IN",
-        voiceId: "Iniya"
-    },
-    telugu: {
-        locale: "te-IN",
-        voiceId: "Aditi"
-    },
-    kannada: {
-        locale: "kn-IN",
-        voiceId: "Shruti"
-    },
-    malayalam: {
-        locale: "ml-IN",
-        voiceId: "Alia"
-    }
+  english: {
+    voiceId: "Natalie",
+    locale: "en-IN",
+    style: "Newscast Casual"
+  },
+  hindi: {
+    voiceId: "Natalie",
+    locale: "hi-IN",
+    style: "Newscast Casual"
+  },
+  telugu: {
+    voiceId: "Natalie",
+    locale: "te-IN",
+    style: "Newscast Casual"
+  },
+  tamil: {
+    voiceId: "Natalie",
+    locale: "ta-IN",
+    style: "Newscast Casual"
+  },
+  kannada: {
+    voiceId: "Natalie",
+    locale: "kn-IN",
+    style: "Newscast Casual"
+  },
+  malayalam: {
+    voiceId: "Natalie",
+    locale: "ml-IN",
+    style: "Newscast Casual"
+  }
 };
 
 export async function textToSpeech(summary, language = "english") {
@@ -84,9 +90,7 @@ export async function textToSpeech(summary, language = "english") {
     
 const config =
     VOICE_MAP[language?.trim().toLowerCase()] || VOICE_MAP.english;
-    console.log("Language:", language);
-console.log("Config:", config);
-console.log("Text:", summary);
+    
 
     try {
 
@@ -95,6 +99,7 @@ console.log("Text:", summary);
             {
                 voiceId: config.voiceId,
                 locale: config.locale,
+                 style: config.style,
                 format: "MP3",
                 text: summary
             },

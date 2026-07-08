@@ -1,31 +1,36 @@
 import axios from "axios";
 
 const VOICE_MAP = {
-      english: {
-        locale: "en-IN",
-        voiceId: "en-IN-priya"
-    },
-    hindi: {
-        voiceId: "Aditi",
-        locale: "hi-IN"
-    },
-    tamil: {
-        voiceId: "Iniya",
-        locale: "ta-IN"
-    },
-    telugu: {
-        voiceId: "Aditi",
-        locale: "te-IN"
-    },
-    kannada: {
-        voiceId: "Shruti",
-        locale: "kn-IN"
-    },
-    malayalam: {
-        voiceId: "Alia",
-        locale: "ml-IN"
-    }
-  
+  english: {
+    voiceId: "Natalie",
+    locale: "en-IN",
+    style: "Newscast Casual"
+  },
+  hindi: {
+    voiceId: "Natalie",
+    locale: "hi-IN",
+    style: "Newscast Casual"
+  },
+  telugu: {
+    voiceId: "Natalie",
+    locale: "te-IN",
+    style: "Newscast Casual"
+  },
+  tamil: {
+    voiceId: "Natalie",
+    locale: "ta-IN",
+    style: "Newscast Casual"
+  },
+  kannada: {
+    voiceId: "Natalie",
+    locale: "kn-IN",
+    style: "Newscast Casual"
+  },
+  malayalam: {
+    voiceId: "Natalie",
+    locale: "ml-IN",
+    style: "Newscast Casual"
+  }
 };
 
 export async function textToSpeech(text, language) {
@@ -39,6 +44,7 @@ export async function textToSpeech(text, language) {
             {
                   voiceId: config.voiceId,
                  locale: config.locale,
+                    style: config.style,
                    format: "MP3",
                 text
             },
