@@ -45,8 +45,8 @@ async function fetchLogs() {
 
         logs.forEach(log => {
 
-      const formattedDate = new Date(
-    log.created_at + " UTC"
+const formattedDate = new Date(
+    log.call_date_time
 ).toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
     day: "2-digit",
