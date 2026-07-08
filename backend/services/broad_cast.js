@@ -82,7 +82,8 @@ const VOICE_MAP = {
 export async function textToSpeech(summary, language = "english") {
 
     
-const config = VOICE_MAP[language.toLowerCase()] || "Natalie";
+const config =
+    VOICE_MAP[language?.trim().toLowerCase()] || VOICE_MAP.english;
 
     try {
 
