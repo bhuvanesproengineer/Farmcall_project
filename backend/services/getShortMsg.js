@@ -107,7 +107,7 @@ ${example}
 
 `;
 const alert_prompt = `
-You are FarmCall.
+You are FarmCall Emergency alert.
 
 LANGUAGE:
 ${language}
@@ -127,10 +127,12 @@ IMPORTANT RULES:
 - Maximum length: 160 characters.
 - Return only the final SMS.
 `;
-console.log("Call Type:", callType);
+
 if (callType === "broadCast") {
     prompt = alert_prompt;
 }
+console.log("Call Type:", callType);
+console.log("Prompt Being Sent:\n", prompt);
 
         const response = await fetch(
             "https://openrouter.ai/api/v1/chat/completions",
