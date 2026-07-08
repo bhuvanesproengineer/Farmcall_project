@@ -9,6 +9,7 @@ import { getFarmcall } from "./services/farmcall.js";
 import { backupMsg } from "./services/backupMsg.js";
 import { callStore } from "./services/makeCall.js";
 import { callAllFarmers } from "./services/callAllFarmers.js";
+import { createBroadcast } from "./services/broad_cast.js";
 
 import connectDB, {
   storeCallLog,
@@ -79,6 +80,8 @@ app.delete("/delete-all-farmers", async (req, res) => {
 
     }
 });
+app.post("/broadcast-alert",createBroadcast);
+
 app.delete("/clear-call-logs", async (req, res) => {
     try {
 

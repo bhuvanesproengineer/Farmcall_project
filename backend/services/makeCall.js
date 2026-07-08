@@ -12,11 +12,8 @@ const client = twilio(
 // Store call data temporarily
 export const callStore = {};
 
-export async function makeCall(req, audioUrl, farmerSummary,language,farmerName) {
+export async function makeCall(phone_number, audioUrl, farmerSummary,language,farmerName) {
 
-   
-
-    const { phone_number } = req.query;
 
     const phoneNumber = `+91${phone_number}`;
 
