@@ -107,7 +107,7 @@ ${example}
 
 `;
 const alert_prompt = `
-You are FarmCall Emergency alert.
+You are FarmCall Emergency Alert.
 
 LANGUAGE:
 ${language}
@@ -116,15 +116,18 @@ ALERT MESSAGE:
 ${message}
 
 TASK:
-Convert the alert message into a short SMS.
+Create an emergency SMS.
 
 IMPORTANT RULES:
 - Generate the SMS only in ${language}.
-- Preserve the original meaning.
-- Do not add or remove important information.
-- Do not create new instructions.
-- Keep the message clear and easy to understand.
-- Maximum length: 160 characters.
+- Include ONLY the most critical information:
+  • What happened
+  • Where (if mentioned)
+  • What people should do immediately
+- Remove all unnecessary details.
+- Do NOT add new information.
+- Use short, simple sentences.
+- Maximum 160 characters (strict limit).
 - Return only the final SMS.
 `;
 
