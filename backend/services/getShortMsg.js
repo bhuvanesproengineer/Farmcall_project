@@ -127,6 +127,7 @@ IMPORTANT RULES:
 - Maximum length: 160 characters.
 - Return only the final SMS.
 `;
+console.log("Call Type:", callType);
 if (callType === "broadCast") {
     prompt = alert_prompt;
 }
