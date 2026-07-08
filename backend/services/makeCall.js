@@ -16,7 +16,7 @@ export async function makeCall(phone_number, audioUrl, farmerSummary,language,fa
 
    
 
-   
+   console.log("callType received:", callType);
 
     const phoneNumber = `+91${phone_number}`;
 
