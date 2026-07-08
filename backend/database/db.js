@@ -75,6 +75,18 @@ export async function startAutomation(callTime) {
     }
   );
 }
+export async function deleteFarmer(id) {
+  return await Farmer.findByIdAndDelete(id);
+}
+export async function updateFarmer(id, updatedData) {
+    return await Farmer.findByIdAndUpdate(
+        id,
+        updatedData,
+        {
+            new: true
+        }
+    );
+}
   
 
 export async function stopAutomation() {

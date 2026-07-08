@@ -17,7 +17,7 @@ import connectDB, {
   getAllFarmers,
   startAutomation,
   stopAutomation,
-  getAutomation
+  getAutomation,deleteFarmer,updateFarmer
 } from "./database/db.js";
 
 dotenv.config();
@@ -39,6 +39,49 @@ app.post("/call-all-farmers", async (req, res) => {
         message: "Calling process started"
     });
 
+});
+app.delete("/delete-farmer/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await deleteFarmer(id);
+
+        res.status(200).json({
+            message: "Farmer deleted successfully"
+        });
+    } catch (error) {
+        console.error("Error deleting farmer:", error);
+
+        res.status(500).json({
+            message: "Error deleting farmer"
+        });
+    }
+});
+app.put("/update-farmer/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedData = req.body;
+
+        const updatedFarmer = await updateFarmer(id, updatedData);
+
+        if (!updatedFarmer) {
+            return res.status(404).json({
+                message: "Farmer not found"
+            });
+        }
+
+        res.status(200).json({
+            message: "Farmer updated successfully",
+            data: updatedFarmer
+        });
+
+    } catch (error) {
+        console.error("Error updating farmer:", error);
+
+        res.status(500).json({
+            message: "Error updating farmer"
+        });
+    }
 });
 
 
