@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function getShortMsg(
-    farmerSummary,
+    message,
     language = "English",callType
 ) {
     try {
@@ -75,7 +75,7 @@ LANGUAGE:
 ${language}
 
 FARMER ADVISORY:
-${farmerSummary}
+${message}
 
 TASK:
 Read the advisory carefully and extract only the final farming decisions.
