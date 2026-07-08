@@ -87,7 +87,13 @@ export async function updateFarmer(id, updatedData) {
         }
     );
 }
+export async function deleteAllFarmers() {
+    return await Farmer.deleteMany({});
+}
   
+export async function clearCallLogs() {
+    return await CallLog.deleteMany({});
+}
 
 export async function stopAutomation() {
   return await Automation.findOneAndUpdate(

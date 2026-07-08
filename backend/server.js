@@ -17,7 +17,7 @@ import connectDB, {
   getAllFarmers,
   startAutomation,
   stopAutomation,
-  getAutomation,deleteFarmer,updateFarmer
+  getAutomation,deleteFarmer,updateFarmer,deleteAllFarmers,clearCallLogs
 } from "./database/db.js";
 
 dotenv.config();
@@ -55,6 +55,50 @@ app.delete("/delete-farmer/:id", async (req, res) => {
         res.status(500).json({
             message: "Error deleting farmer"
         });
+    }
+});
+app.delete("/delete-all-farmers", async (req, res) => {
+    try {
+
+        const result = await deleteAllFarmers();
+
+        res.status(200).json({
+            success: true,
+            message: "All farmers deleted successfully",
+            deletedCount: result.deletedCount
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete all farmers"
+        });
+
+    }
+});
+app.delete("/clear-call-logs", async (req, res) => {
+    try {
+
+        const result = await clearCallLogs();
+
+        res.status(200).json({
+            success: true,
+            message: "Call logs cleared successfully",
+            deletedCount: result.deletedCount
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to clear call logs"
+        });
+
     }
 });
 app.put("/update-farmer/:id", async (req, res) => {
