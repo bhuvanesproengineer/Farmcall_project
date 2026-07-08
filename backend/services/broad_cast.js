@@ -84,6 +84,9 @@ export async function textToSpeech(summary, language = "english") {
     
 const config =
     VOICE_MAP[language?.trim().toLowerCase()] || VOICE_MAP.english;
+    console.log("Language:", language);
+console.log("Config:", config);
+console.log("Text:", summary);
 
     try {
 
