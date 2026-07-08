@@ -13,6 +13,7 @@ Then continue with the translated message.
 
 Message:
 ${message}
+End the translation with a friendly thankyou.
 
 Return only the final spoken message.
 `;
