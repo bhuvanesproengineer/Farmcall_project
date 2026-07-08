@@ -28,11 +28,10 @@ const VOICE_MAP = {
   
 };
 
-export async function textToSpeech(text, req) {
-    console.log("language original>", req?.query?.language);
-    const language = req?.query?.language || "english";
+export async function textToSpeech(text, language) {
+   
     const config = VOICE_MAP[language.toLowerCase()] || "Natalie";
-    console.log("Language weather:", language);
+    
 
     try {
         const response = await axios.post(

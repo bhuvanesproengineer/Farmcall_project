@@ -56,7 +56,7 @@ export async function getFarmcall(req, res) {
         const farmerSummary = await getFarmerSummary(req, weatherSummary);
 
         // 8. Generate Audio
-        const audioResult=await textToSpeech(farmerSummary);
+        const audioResult=await textToSpeech(farmerSummary,language);
         
         
        const callResult = await makeCall(

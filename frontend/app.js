@@ -68,7 +68,7 @@
                 {
                     method: "POST"
                 }
-            );
+            );  
 
             const data = await response.json();
 
