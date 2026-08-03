@@ -1,19 +1,53 @@
-import {getFarmcall} from './farmcall.js';
+import { getFarmcall } from './farmcall.js';
 
 export const callAllFarmers = async (farmers) => {
+    if (!Array.isArray(farmers) || farmers.length === 0) {
+        console.log("[callAllFarmers] No farmers found to call.");
+        return;
+    }
+
     const promises = [];
 
     for (const farmer of farmers) {
-        const req = { query: farmer };
+        // Convert Mongoose document to a plain JavaScript object
+        const farmerData = farmer && typeof farmer.toObject === 'function' 
+            ? farmer.toObject() 
+            : (farmer || {});
+
+        // Normalize camelCase / snake_case properties
+        farmerData.farmerName = farmerData.farmerName || farmerData.farmer_name || "Farmer";
+        farmerData.farmer_name = farmerData.farmer_name || farmerData.farmerName || "Farmer";
+        farmerData.phoneNumber = farmerData.phoneNumber || farmerData.phone_number || "";
+        farmerData.phone_number = farmerData.phone_number || farmerData.phoneNumber || "";
+
+        if (!farmerData.phoneNumber) {
+            console.warn(`[callAllFarmers] Skipping farmer "${farmerData.farmerName}" (ID: ${farmerData._id || 'unknown'}): No phone number registered.`);
+            continue;
+        }
+
+        const req = { 
+            body: farmerData, 
+            query: farmerData, 
+            ...farmerData 
+        };
 
         const res = {
-            status: () => ({
-                json: () => {}
+            status: (statusCode) => ({
+                json: (responseData) => {
+                    if (statusCode >= 400) {
+                        console.error(`[callAllFarmers] Response ${statusCode} for farmer ${farmerData.farmerName}:`, responseData);
+                    }
+                    return responseData;
+                }
             })
         };
 
-        promises.push(getFarmcall(req, res));
+        promises.push(
+            getFarmcall(req, res).catch(err => {
+                console.error(`[callAllFarmers] Exception processing call for ${farmerData.farmerName}:`, err.message || err);
+            })
+        );
     }
 
     await Promise.all(promises);
-}
+};

@@ -12,21 +12,24 @@ const client = twilio(
 // Store call data temporarily
 export const callStore = {};
 
-export async function makeCall(phone_number, audioUrl, farmerSummary,language,farmerName,callType) {
+export async function makeCall(phone_number, audioUrl, farmerSummary, language, farmerName, callType) {
 
-   
 
-   console.log("callType received:", callType);
 
-    const phoneNumber = `+91${phone_number}`;
 
-    const safeAudioUrl = audioUrl
+    let phoneNumber = phone_number ? String(phone_number).trim() : "";
+    if (phoneNumber && !phoneNumber.startsWith("+")) {
+        phoneNumber = `+91${phoneNumber}`;
+    }
+    console.log("Calling farmer:", phoneNumber);
+
+    const safeAudioUrl = (audioUrl || "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-   
-  
+
+
 
     try {
 
@@ -48,10 +51,10 @@ export async function makeCall(phone_number, audioUrl, farmerSummary,language,fa
             phoneNumber,
             farmerSummary,
             language,
-            farmerName,callType
+            farmerName, callType
         };
 
-        
+
         return {
             success: true,
             callSid: call.sid

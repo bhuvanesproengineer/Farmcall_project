@@ -47,8 +47,8 @@ Return only the final spoken message.
         return data.choices[0].message.content;
 
     } catch (err) {
-        console.error(err);
-        throw err;
+        console.error("[translateBroadcastMessage Error]:", err.message || err);
+        return `Hello ${farmerName}, ${message}. Thank you.`;
     }
 }
 import axios from "axios";
@@ -129,7 +129,8 @@ const config =
 export const createBroadcast = async (req, res) => {
     try {
 
-        const { message } = req.body;
+        const params = { ...(req.query || {}), ...(req.body || {}), ...(req.body ? {} : req) };
+        const { message } = params;
 
         const farmers = await getAllFarmers();
 
@@ -140,9 +141,12 @@ export const createBroadcast = async (req, res) => {
             promises.push(
                 (async () => {
 
+                    const farmerName = farmer.farmer_name || farmer.farmerName || "Farmer";
+                    const phoneNumber = farmer.phone_number || farmer.phoneNumber || "";
+
                     const translatedMessage = await translateBroadcastMessage(
                         message,
-                        farmer.farmer_name,
+                        farmerName,
                         farmer.language
                     );
 
@@ -152,11 +156,11 @@ export const createBroadcast = async (req, res) => {
                     );
 
                     return await makeCall(
-                        farmer.phone_number,
+                        phoneNumber,
                         audioUrl,
                         translatedMessage,
                         farmer.language,
-                        farmer.farmer_name,
+                        farmerName,
                         "broadCast"
                     );
 

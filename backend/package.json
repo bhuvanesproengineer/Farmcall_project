@@ -14,14 +14,17 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.17.0",
+    "bcrypt": "^6.0.0",
     "better-sqlite3": "^12.11.1",
     "cors": "^2.8.6",
     "cron": "^4.4.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "google-tts-api": "^2.0.2",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.4",
     "node-cron": "^4.6.0",
+    "nodemailer": "^9.0.3",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
     "twilio": "^6.0.2"

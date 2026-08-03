@@ -34,44 +34,46 @@ const VOICE_MAP = {
 };
 
 export async function textToSpeech(text, language) {
-   
-    const config = VOICE_MAP[language.toLowerCase()] || "Natalie";
-    
+  console.log(language);
+  console.log(text);
 
-    try {
-        const response = await axios.post(
-            "https://api.murf.ai/v1/speech/generate",
-            {
-                  voiceId: config.voiceId,
-                 locale: config.locale,
-                    style: config.style,
-                   format: "MP3",
-                text
-            },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "api-key": process.env.MURF_API_KEY
-                }
-            }
-        );
-        // 👇 Add this temporarily
-const test = await axios.get(response.data.audioFile);
+  const config = VOICE_MAP[language.toLowerCase()] || "Natalie";
 
-console.log("Status:", test.status);
-console.log("Content-Type:", test.headers["content-type"]);
-console.log("Content-Length:", test.headers["content-length"]); 
-    
 
-        return {
-            audioUrl: response.data.audioFile,
-            source: "murf"
-        };
+  try {
+    const response = await axios.post(
+      "https://api.murf.ai/v1/speech/generate",
+      {
+        voiceId: config.voiceId,
+        locale: config.locale,
+        style: config.style,
+        format: "MP3",
+        text
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "api-key": process.env.MURF_API_KEY
+        }
+      }
+    );
+    // 👇 Add this temporarily
+    const test = await axios.get(response.data.audioFile);
 
-    } catch (error) {
-        console.error("Status:", error.response?.status);
-        console.error("Response:", error.response?.data);
-        throw error;
-    }
+    console.log("Status:", test.status);
+    console.log("Content-Type:", test.headers["content-type"]);
+    console.log("Content-Length:", test.headers["content-length"]);
+
+
+    return {
+      audioUrl: response.data.audioFile,
+      source: "murf"
+    };
+
+  } catch (error) {
+    console.error("Status:", error.response?.status);
+    console.error("Response:", error.response?.data);
+    throw error;
+  }
 }

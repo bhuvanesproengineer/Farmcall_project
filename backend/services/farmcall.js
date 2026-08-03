@@ -3,13 +3,15 @@ import { getWeatherData } from "./weather.js";
 import { getWeatherSummary } from "./weatherSummary.js";
 import { getFarmerSummary } from "./farmerSummary.js";
 import { textToSpeech } from "./text_to_speech.js";
-import {makeCall} from "./makeCall.js";
+import { makeCall } from "./makeCall.js";
 
 export async function getFarmcall(req, res) {
     try {
-        // 1. Extrvc act query parameters
-        const { village, mandal, district, pincode, state,language,farmer_name,phone_number } = req.query;
-        
+        // 1. Extract parameters from body, query, or direct properties
+        const params = { ...(req.query || {}), ...(req.body || {}), ...(req.body ? {} : req) };
+        const { village, mandal, district, pincode, state, language } = params;
+        const farmerName = params.farmerName || params.farmer_name || "Farmer";
+        const phoneNumber = params.phoneNumber || params.phone_number || "";
 
         // 2. Build the address
         const address = [village, mandal, district, pincode, state]
@@ -42,7 +44,7 @@ export async function getFarmcall(req, res) {
                 message: `Location not found for: ${address}`
             });
         }
-      
+
         // 5. Fetch Weather
         const weatherData = await getWeatherData(
             location_data.latitude,
@@ -56,16 +58,17 @@ export async function getFarmcall(req, res) {
         const farmerSummary = await getFarmerSummary(req, weatherSummary);
 
         // 8. Generate Audio
-        const audioResult=await textToSpeech(farmerSummary,language);
-        
-        
-       const callResult = await makeCall(
-    phone_number,
-    audioResult.audioUrl,
-    farmerSummary,language,farmer_name,"weather"
-);
+        const audioResult = await textToSpeech(farmerSummary, language);
+
+        const callResult = await makeCall(
+            phoneNumber,
+            audioResult.audioUrl,
+            farmerSummary,
+            language,
+            farmerName,
+            "weather"
+        );
         return res.status(200).json(
-            
             farmerSummary
         );
 
