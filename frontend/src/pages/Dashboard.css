@@ -50,6 +50,34 @@
   font-weight: 700;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.clear-dashboard-btn {
+  background-color: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 150ms ease;
+}
+
+.clear-dashboard-btn:hover:not(:disabled) {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+  border-color: #FCA5A5;
+  transform: translateY(-1px);
+}
+
 .refresh-dashboard-btn {
   background-color: #16A34A;
   color: #FFFFFF;
@@ -189,6 +217,34 @@
   color: #0F172A;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+.stat-value-container {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.stat-rate-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.stat-rate-badge.green {
+  background-color: #DCFCE7;
+  color: #15803D;
+  border: 1px solid #BBF7D0;
+}
+
+.stat-rate-badge.red {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+  border: 1px solid #FECACA;
 }
 
 /* Dashboard Row Two: Balanced Recent Logs & Automation Status */

@@ -13,6 +13,7 @@ import {
   ArrowRightIcon,
   CheckCircleIcon,
   XCircleIcon,
+  TrashIcon,
 } from '../components/Icons';
 import './Dashboard.css';
 
@@ -85,6 +86,34 @@ function Dashboard() {
     }
   };
 
+  // Clear all call logs and reset dashboard stats
+  const clearAllLogs = async () => {
+    const confirmClear = window.confirm('Are you sure you want to delete all call logs? This cannot be undone.');
+    if (!confirmClear) return;
+    try {
+      const apiBase = getApiBase();
+      const token = localStorage.getItem('farmcall_token');
+      const response = await fetch(`${apiBase}/calls/logs`, {
+        method: 'DELETE',
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      if (response.ok) {
+        // Reset logs state; other stats will recalc to zero
+        setLogs([]);
+        await fetchDashboardData();
+      } else {
+        const data = await response.json();
+        alert(data.message || 'Failed to clear call logs.');
+      }
+    } catch (err) {
+      console.error('Error clearing call logs:', err);
+      alert('Error clearing call logs.');
+    }
+  };
+
+
   useEffect(() => {
     fetchDashboardData();
   }, []);
@@ -104,6 +133,8 @@ function Dashboard() {
     0
   );
   const avgDurationSeconds = totalCalls > 0 ? Math.round(totalDurationSeconds / totalCalls) : 0;
+  const overallSuccessRate = totalCalls > 0 ? Math.round((answeredCalls / totalCalls) * 100) : 0;
+  const overallFailureRate = totalCalls > 0 ? Math.round((unansweredCalls / totalCalls) * 100) : 0;
 
   // --- Calculate Today's Performance ---
   const todayStr = new Date().toDateString();
@@ -125,6 +156,8 @@ function Dashboard() {
     0
   );
   const avgDurationTodaySeconds = callsToday > 0 ? Math.round(todayDurationSeconds / callsToday) : 0;
+  const todaySuccessRate = callsToday > 0 ? Math.round((answeredToday / callsToday) * 100) : 0;
+  const todayFailureRate = callsToday > 0 ? Math.round((unansweredToday / callsToday) * 100) : 0;
   const broadcastsToday = todayLogs.filter(
     (l) => (l.callType || l.call_type || '').toLowerCase() === 'broadcast'
   ).length;
@@ -175,6 +208,10 @@ function Dashboard() {
             </div>
           </div>
           <div className="header-actions">
+            <button className="clear-dashboard-btn" onClick={clearAllLogs} disabled={loading}>
+              <TrashIcon size={16} />
+              <span>Clear All</span>
+            </button>
             <button className="refresh-dashboard-btn" onClick={fetchDashboardData} disabled={loading}>
               <RefreshIcon className={loading ? 'spin' : ''} size={16} />
               <span>Refresh Stats</span>
@@ -219,7 +256,14 @@ function Dashboard() {
               </div>
               <div className="stat-content">
                 <span className="stat-label">Answered Calls</span>
-                <span className="stat-value">{loading ? '...' : answeredCalls}</span>
+                <div className="stat-value-container">
+                  <span className="stat-value">{loading ? '...' : answeredCalls}</span>
+                  {!loading && totalCalls > 0 && (
+                    <span className="stat-rate-badge green" title="Success Rate">
+                      {overallSuccessRate}%
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -230,7 +274,14 @@ function Dashboard() {
               </div>
               <div className="stat-content">
                 <span className="stat-label">Unanswered Calls</span>
-                <span className="stat-value">{loading ? '...' : unansweredCalls}</span>
+                <div className="stat-value-container">
+                  <span className="stat-value">{loading ? '...' : unansweredCalls}</span>
+                  {!loading && totalCalls > 0 && (
+                    <span className="stat-rate-badge red" title="Failure Rate">
+                      {overallFailureRate}%
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -284,7 +335,14 @@ function Dashboard() {
               </div>
               <div className="stat-content">
                 <span className="stat-label">Answered Today</span>
-                <span className="stat-value">{loading ? '...' : answeredToday}</span>
+                <div className="stat-value-container">
+                  <span className="stat-value">{loading ? '...' : answeredToday}</span>
+                  {!loading && callsToday > 0 && (
+                    <span className="stat-rate-badge green" title="Success Rate Today">
+                      {todaySuccessRate}%
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -295,7 +353,14 @@ function Dashboard() {
               </div>
               <div className="stat-content">
                 <span className="stat-label">Unanswered Today</span>
-                <span className="stat-value">{loading ? '...' : unansweredToday}</span>
+                <div className="stat-value-container">
+                  <span className="stat-value">{loading ? '...' : unansweredToday}</span>
+                  {!loading && callsToday > 0 && (
+                    <span className="stat-rate-badge red" title="Failure Rate Today">
+                      {todayFailureRate}%
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -321,16 +386,7 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Broadcasts Today */}
-            <div className="stat-card">
-              <div className="stat-icon-wrapper blue-bg">
-                <RadioIcon size={20} />
-              </div>
-              <div className="stat-content">
-                <span className="stat-label">Broadcasts Today</span>
-                <span className="stat-value">{loading ? '...' : broadcastsToday}</span>
-              </div>
-            </div>
+
           </div>
         </section>
 
@@ -455,15 +511,7 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="action-card" onClick={() => navigate('/broadcast')}>
-              <div className="action-icon-box blue-icon">
-                <RadioIcon size={20} />
-              </div>
-              <div className="action-info">
-                <h4>Broadcast Alert</h4>
-                <p>Send emergency voice alert to all farmers</p>
-              </div>
-            </div>
+
 
             <div className="action-card" onClick={() => navigate('/farmers')}>
               <div className="action-icon-box purple-icon">
