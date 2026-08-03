@@ -83,9 +83,76 @@ app.get("/profile/", authenticateToken, async (request, response) => {
   response.send(userDetails);
 });
 
+// Public Webhook Endpoint for Twilio Call Status Callbacks (Unauthenticated)
+app.post(["/api/call-status", "/calls/status"], async (req, res) => {
+  try {
+    const params = { ...(req.query || {}), ...(req.body || {}), ...(req.body ? {} : req) };
+    const status = params.CallStatus || "completed";
+    const duration = Number(params.CallDuration || 0);
+    const callSid = params.CallSid;
+
+    const { callStore } = await import("./services/makeCall.js");
+    const { storeCallLog } = await import("./database/db.js");
+    const { backupMsg } = await import("./services/backupMsg.js");
+
+    const callData = callStore[callSid];
+
+    if (!callData) {
+      console.log("Call status callback received for SID:", callSid, "| Status:", status);
+      return res.sendStatus(200);
+    }
+
+    let smsStatus = "failed";
+    try {
+      smsStatus = await backupMsg(
+        status,
+        duration,
+        callData.phoneNumber,
+        callData.farmerSummary,
+        callData.language,
+        callData.callType
+      );
+    } catch (error) {
+      smsStatus = "failed";
+    }
+
+    if (callData.logId) {
+      try {
+        const CallLog = (await import("./models/CallLog.js")).default;
+        await CallLog.findByIdAndUpdate(callData.logId, {
+          call_status: status,
+          call_duration: duration,
+          sms_status: smsStatus
+        });
+      } catch (err) {
+        console.error("Error updating CallLog by ID:", err.message);
+      }
+    } else {
+      await storeCallLog(
+        callData.farmerName,
+        callData.phoneNumber,
+        status,
+        duration,
+        smsStatus,
+        callData.username
+      );
+    }
+
+    delete callStore[callSid];
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Webhook Status Error:", error);
+    res.sendStatus(500);
+  }
+});
+
 app.use("/farmers", authenticateToken, farmerRoutes);
 app.use("/automation", authenticateToken, automationRoutes);
 app.use("/calls", authenticateToken, callRoutes);
+app.use("/api/call-logs", authenticateToken, (req, res, next) => {
+  req.url = "/logs";
+  return callRoutes(req, res, next);
+});
 app.use("/broadcast", authenticateToken, broadcastRoutes);
 app.use("/farmcall", authenticateToken, aiRoutes);
 app.use("/", healthRoutes);

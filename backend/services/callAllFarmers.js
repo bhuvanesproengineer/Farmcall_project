@@ -1,6 +1,6 @@
 import { getFarmcall } from './farmcall.js';
 
-export const callAllFarmers = async (farmers) => {
+export const callAllFarmers = async (farmers, username) => {
     if (!Array.isArray(farmers) || farmers.length === 0) {
         console.log("[callAllFarmers] No farmers found to call.");
         return;
@@ -25,9 +25,12 @@ export const callAllFarmers = async (farmers) => {
             continue;
         }
 
+        const farmerUsername = username || farmerData.username;
+
         const req = { 
             body: farmerData, 
             query: farmerData, 
+            username: farmerUsername,
             ...farmerData 
         };
 

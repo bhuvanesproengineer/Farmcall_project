@@ -131,8 +131,9 @@ export const createBroadcast = async (req, res) => {
 
         const params = { ...(req.query || {}), ...(req.body || {}), ...(req.body ? {} : req) };
         const { message } = params;
+        const username = req.username || params.username;
 
-        const farmers = await getAllFarmers();
+        const farmers = await getAllFarmers(username);
 
         const promises = [];
 
@@ -161,7 +162,8 @@ export const createBroadcast = async (req, res) => {
                         translatedMessage,
                         farmer.language,
                         farmerName,
-                        "broadCast"
+                        "broadCast",
+                        username
                     );
 
                 })()

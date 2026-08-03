@@ -60,13 +60,16 @@ export async function getFarmcall(req, res) {
         // 8. Generate Audio
         const audioResult = await textToSpeech(farmerSummary, language);
 
+        const username = req.username || params.username;
+
         const callResult = await makeCall(
             phoneNumber,
             audioResult.audioUrl,
             farmerSummary,
             language,
             farmerName,
-            "weather"
+            "weather",
+            username
         );
         return res.status(200).json(
             farmerSummary

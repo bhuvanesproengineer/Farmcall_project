@@ -14,9 +14,9 @@ const router = express.Router();
 // POST /calls/call-all
 router.post("/call-all", async (req, res) => {
   const farmers = await getAllFarmers(req.username);
-  console.log(farmers);
+  console.log("Calling farmers count:", farmers?.length || 0);
 
-  await callAllFarmers(farmers);
+  await callAllFarmers(farmers, req.username);
 
   res.status(200).json({
     message: "Calling process started"
@@ -27,7 +27,7 @@ router.post("/call-all", async (req, res) => {
 router.post("/status", async (req, res) => {
   try {
     const params = { ...(req.query || {}), ...(req.body || {}), ...(req.body ? {} : req) };
-    const status = params.CallStatus;
+    const status = params.CallStatus || "completed";
     const duration = Number(params.CallDuration || 0);
     const callSid = params.CallSid;
 
@@ -53,14 +53,27 @@ router.post("/status", async (req, res) => {
       smsStatus = "failed";
     }
 
-    await storeCallLog(
-      callData.farmerName,
-      callData.phoneNumber,
-      status,
-      duration,
-      smsStatus,
-      callData.username
-    );
+    if (callData.logId) {
+      try {
+        const CallLog = (await import("../models/CallLog.js")).default;
+        await CallLog.findByIdAndUpdate(callData.logId, {
+          call_status: status,
+          call_duration: duration,
+          sms_status: smsStatus
+        });
+      } catch (err) {
+        console.error("Error updating CallLog by ID:", err.message);
+      }
+    } else {
+      await storeCallLog(
+        callData.farmerName,
+        callData.phoneNumber,
+        status,
+        duration,
+        smsStatus,
+        callData.username
+      );
+    }
 
     delete callStore[callSid];
 

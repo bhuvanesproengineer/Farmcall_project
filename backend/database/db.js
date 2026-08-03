@@ -47,16 +47,17 @@ export async function storeCallLog(
   return await CallLog.create({
     farmer_name: farmerName,
     phone_number: phoneNumber,
-    call_status: callStatus,
-    call_duration: callDuration,
-    sms_status: smsStatus,
+    call_status: callStatus || "initiated",
+    call_duration: typeof callDuration === "number" ? callDuration : 0,
+    sms_status: smsStatus || "not_required",
+    call_date_time: new Date(),
     ...(username && { username })
   });
 }
 
 export async function getCallLogs(username) {
   const query = username ? { username } : {};
-  return await CallLog.find(query).sort({ createdAt: -1 });
+  return await CallLog.find(query).sort({ call_date_time: -1, _id: -1 });
 }
 
 export async function startAutomation(callTime, username) {
