@@ -12,7 +12,7 @@ function Broadcast() {
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       return 'http://localhost:3000';
     }
-    return '';
+    return 'https://farmcall-project-1.onrender.com';
   };
 
   const handleMessageChange = (e) => {
