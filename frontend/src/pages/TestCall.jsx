@@ -279,6 +279,17 @@ function TestCall() {
                   <option value="Telangana">Telangana</option>
                   <option value="Tamil Nadu">Tamil Nadu</option>
                   <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="West Bengal">West Bengal</option>
+                  <option value="Odisha">Odisha</option>
                 </select>
                 <span className="select-arrow">▾</span>
               </div>
@@ -303,7 +314,9 @@ function TestCall() {
                   <option value="Telugu">Telugu</option>
                   <option value="Tamil">Tamil</option>
                   <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
                   <option value="Kannada">Kannada</option>
+                  <option value="Malayalam">Malayalam</option>
                 </select>
                 <span className="select-arrow">▾</span>
               </div>
