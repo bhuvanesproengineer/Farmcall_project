@@ -1,0 +1,392 @@
+/* Automation Scheduler Page Styling - Modern Premium UI */
+
+.automation-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1.75rem 0;
+}
+
+.automation-card {
+  width: 100%;
+  max-width: 840px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.05), 0 2px 8px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e5e7eb;
+  padding: 2.5rem;
+}
+
+/* Header & Modern Pill Status Badge */
+.automation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.automation-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #123b66;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.automation-subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Modern Pill-Style Status Badge */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 200ms ease;
+}
+
+.status-pill.pill-active {
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.status-pill.pill-inactive {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.pill-active .pill-dot {
+  background-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+  animation: pulseDot 2s infinite;
+}
+
+.pill-inactive .pill-dot {
+  background-color: #dc2626;
+}
+
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+}
+
+/* Hero Scheduled Time Banner */
+.scheduled-time-hero {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.25rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-time-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.hero-time-display {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.hero-time-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #123b66;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hero-time-zone {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.hero-status-note {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.note-active {
+  color: #16a34a;
+}
+
+.note-inactive {
+  color: #94a3b8;
+}
+
+/* Configuration Form */
+.automation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.time-picker-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.time-picker-row {
+  display: flex;
+  align-items: center;
+}
+
+.time-input {
+  height: 50px;
+  width: 100%;
+  max-width: 260px;
+  padding: 0 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  background-color: #fafafa;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+  font-family: inherit;
+}
+
+.time-input:focus {
+  border-color: #16a34a;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3.5px rgba(22, 163, 74, 0.15);
+}
+
+.field-hint {
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Visually Balanced Action Buttons */
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 540px) {
+  .button-group {
+    flex-direction: column;
+  }
+}
+
+.start-automation-btn {
+  flex: 1;
+  height: 50px;
+  background-color: #16a34a;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 200ms ease, transform 150ms ease, box-shadow 200ms ease;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+}
+
+.start-automation-btn:hover:not(:disabled) {
+  background-color: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+}
+
+.start-automation-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.start-automation-btn:disabled {
+  background-color: #9ca3af;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.stop-automation-btn {
+  flex: 1;
+  height: 50px;
+  background-color: #ffffff;
+  color: #dc2626;
+  border: 2px solid #fecaca;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.stop-automation-btn:hover:not(:disabled) {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+  color: #b91c1c;
+}
+
+/* Workflow Section with Icons & Step Numbers */
+.workflow-section {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 2.25rem;
+}
+
+.workflow-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #123b66;
+  margin-bottom: 1.25rem;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .workflow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.workflow-step {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.2rem;
+  transition: border-color 200ms ease, transform 150ms ease, box-shadow 200ms ease;
+}
+
+.workflow-step:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  background-color: #16a34a;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+}
+
+.step-icon {
+  font-size: 1.35rem;
+}
+
+.workflow-step h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.35rem;
+}
+
+.workflow-step p {
+  font-size: 0.83rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Toast Notification */
+.automation-toast {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  z-index: 1100;
+  animation: slideIn 250ms ease-out;
+}
+
+.automation-toast.success {
+  background-color: #16a34a;
+}
+
+.automation-toast.error {
+  background-color: #dc2626;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

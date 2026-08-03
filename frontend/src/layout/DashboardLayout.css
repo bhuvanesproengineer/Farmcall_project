@@ -1,0 +1,336 @@
+/* Modern SaaS Dashboard Layout Styling */
+
+:root {
+  --db-navbar-height: 64px;
+  --db-sidebar-width: 240px;
+  --db-bg-page: #F8FAF7;
+  --db-bg-surface: #FFFFFF;
+  --db-border-color: #E5E7EB;
+  --db-brand-green: #22A447;
+  --db-brand-green-hover: #18863A;
+  --db-brand-green-light: #F0FDF4;
+  --db-brand-navy: #123B66;
+  --db-text-primary: #1F2937;
+  --db-text-secondary: #6B7280;
+  --db-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --db-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+  --db-radius-md: 10px;
+}
+
+.dashboard-layout {
+  min-height: 100vh;
+  background-color: var(--db-bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= Top Navbar ================= */
+.db-navbar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--db-navbar-height);
+  background-color: var(--db-bg-surface);
+  border-bottom: 1px solid var(--db-border-color);
+  box-shadow: var(--db-shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 100;
+}
+
+.db-navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.db-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.db-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.db-brand-text {
+  font-size: 1.4rem;
+  font-weight: 800;
+  font-family: var(--font-sans, sans-serif);
+}
+
+.db-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.db-icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--db-text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.db-icon-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.db-icon-btn:hover {
+  background-color: var(--db-bg-page);
+  color: var(--db-brand-navy);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--db-brand-green);
+  border-radius: 50%;
+  border: 2px solid var(--db-bg-surface);
+}
+
+/* User Profile Avatar & Dropdown */
+.db-user-menu-container {
+  position: relative;
+}
+
+.db-user-avatar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: none;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.6rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.db-user-avatar-btn:hover {
+  background-color: var(--db-bg-page);
+  border-color: var(--db-border-color);
+}
+
+.db-avatar-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--db-brand-green) 0%, var(--db-brand-navy) 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.db-user-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--db-text-primary);
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.db-chevron-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--db-text-secondary);
+  transition: transform 200ms ease;
+}
+
+.db-chevron-icon.open {
+  transform: rotate(180deg);
+}
+
+.db-user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 220px;
+  background-color: var(--db-bg-surface);
+  border: 1px solid var(--db-border-color);
+  border-radius: var(--db-radius-md);
+  box-shadow: var(--db-shadow-md);
+  padding: 0.5rem 0;
+  z-index: 110;
+  animation: dropdownFadeIn 150ms ease;
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-user-info {
+  padding: 0.6rem 1rem;
+}
+
+.user-info-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--db-text-primary);
+}
+
+.user-info-email {
+  font-size: 0.78rem;
+  color: var(--db-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--db-border-color);
+  margin: 0.4rem 0;
+}
+
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: none;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--db-text-primary);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.dropdown-item svg {
+  width: 16px;
+  height: 16px;
+}
+
+.logout-item {
+  color: #DC2626;
+}
+
+.logout-item:hover {
+  background-color: #FEF2F2;
+}
+
+/* ================= Body & Sidebar ================= */
+.dashboard-body {
+  display: flex;
+  flex: 1;
+}
+
+.db-sidebar {
+  position: fixed;
+  top: var(--db-navbar-height);
+  bottom: 0;
+  left: 0;
+  width: var(--db-sidebar-width);
+  background-color: var(--db-bg-surface);
+  border-right: 1px solid var(--db-border-color);
+  padding: 1.5rem 0.75rem;
+  overflow-y: auto;
+  z-index: 90;
+}
+
+.sidebar-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--db-radius-md);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--db-text-secondary);
+  text-decoration: none;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.sidebar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-link:hover {
+  background-color: var(--db-bg-page);
+  color: var(--db-brand-navy);
+}
+
+.sidebar-link.active {
+  background-color: var(--db-brand-green-light);
+  color: var(--db-brand-green);
+  font-weight: 700;
+}
+
+.sidebar-link.active .sidebar-icon svg {
+  stroke: var(--db-brand-green);
+}
+
+/* ================= Main Content Area ================= */
+.dashboard-content-area {
+  margin-left: var(--db-sidebar-width);
+  margin-top: var(--db-navbar-height);
+  flex: 1;
+  min-height: calc(100vh - var(--db-navbar-height));
+  padding: 2rem;
+  background-color: var(--db-bg-page);
+}
+
+.dashboard-content-container {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ================= Responsive Queries ================= */
+@media (max-width: 768px) {
+  :root {
+    --db-sidebar-width: 70px;
+  }
+
+  .sidebar-label {
+    display: none;
+  }
+
+  .sidebar-link {
+    justify-content: center;
+    padding: 0.75rem 0;
+  }
+
+  .db-user-name {
+    display: none;
+  }
+}

@@ -1,0 +1,244 @@
+/* AI Weather & Farm Advisory Page Styling */
+
+.advisory-page {
+  background-color: #F5FAF6;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+.advisory-hero {
+  background-color: #F5FAF6;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+}
+
+.advisory-hero-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.advisory-badge {
+  display: inline-block;
+  background-color: rgba(34, 164, 71, 0.12);
+  color: #22A447;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.advisory-title {
+  color: #123B66;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.advisory-tagline {
+  color: #22A447;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.advisory-intro {
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.advisory-content-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 0;
+}
+
+.advisory-section {
+  margin-bottom: 3.5rem;
+}
+
+.section-heading {
+  color: #123B66;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Flowchart Styling */
+.flowchart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.flow-step {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.flow-step:hover {
+  transform: translateY(-2px);
+  border-color: #22A447;
+}
+
+.flow-step.active-step {
+  border: 2px solid #22A447;
+  background-color: #F0FDF4;
+}
+
+.step-icon {
+  font-size: 1.5rem;
+}
+
+.step-title {
+  color: #123B66;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.flow-arrow {
+  color: #F59E0B;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Grid Breakdown Section */
+.advisory-grid-section {
+  margin-bottom: 3.5rem;
+}
+
+.advisory-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.advisory-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #F1F5F9;
+}
+
+.card-header h3 {
+  color: #123B66;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.card-icon {
+  font-size: 1.5rem;
+}
+
+.advisory-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.advisory-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: #334155;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+/* Key Message Box */
+.key-message-box {
+  background: linear-gradient(135deg, #123B66 0%, #166534 100%);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 3rem;
+  box-shadow: 0 8px 20px rgba(18, 59, 102, 0.15);
+}
+
+.key-message-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.quote-mark {
+  font-size: 3rem;
+  color: #F59E0B;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.key-message-box p {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+
+/* Back Link */
+.back-link-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #FFFFFF;
+  color: #123B66;
+  border: 2px solid #123B66;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #123B66;
+  color: #FFFFFF;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .advisory-title {
+    font-size: 2rem;
+  }
+
+  .advisory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .key-message-box p {
+    font-size: 1.15rem;
+  }
+}

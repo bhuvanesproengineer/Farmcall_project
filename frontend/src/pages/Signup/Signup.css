@@ -1,0 +1,15 @@
+/* Signup Component Styling Extensions */
+
+.signup-container {
+  max-width: 520px;
+}
+
+.signup-container .login-form-card {
+  padding: 3rem 2.5rem;
+}
+
+@media (max-width: 480px) {
+  .signup-container .login-form-card {
+    padding: 2rem 1.25rem;
+  }
+}
