@@ -31,6 +31,10 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.status(200).send("FarmCall backend is running");
+});
+
 app.use("/", authRoutes);
 app.use("/api/auth", authRoutes);
 
