@@ -42,6 +42,36 @@
   line-height: 1.5;
 }
 
+/* Header Action Buttons */
+.call-logs-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.clear-logs-btn {
+  background-color: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.clear-logs-btn:hover:not(:disabled) {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+  border-color: #FCA5A5;
+}
+
+.clear-logs-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* Refresh Button in Top Right */
 .refresh-btn {
   background-color: #16A34A;
@@ -186,6 +216,18 @@
   color: #15803D;
 }
 
+.call-status.initiated,
+.call-status.ringing,
+.call-status.queued {
+  background-color: #FEF3C7;
+  color: #B45309;
+}
+
+.call-status.in-progress {
+  background-color: #DBEAFE;
+  color: #1D4ED8;
+}
+
 .call-status.failed,
 .call-status.no-answer,
 .call-status.busy {
@@ -196,6 +238,11 @@
 .sms-status.delivered {
   background-color: #EFF6FF;
   color: #1D4ED8;
+}
+
+.sms-status.pending {
+  background-color: #FEF3C7;
+  color: #B45309;
 }
 
 .sms-status.not_required {

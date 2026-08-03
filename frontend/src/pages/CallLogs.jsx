@@ -5,6 +5,7 @@ function CallLogs() {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState('');
 
@@ -70,6 +71,36 @@ function CallLogs() {
     }
   };
 
+  const handleClearLogs = async () => {
+    if (!window.confirm('Are you sure you want to clear all call logs? This action cannot be undone.')) {
+      return;
+    }
+
+    setIsClearing(true);
+    try {
+      const apiBase = getApiBase();
+      const token = localStorage.getItem('farmcall_token');
+
+      const response = await fetch(`${apiBase}/calls/logs`, {
+        method: 'DELETE',
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setLogs([]);
+      } else {
+        alert(data.message || 'Failed to clear call logs.');
+      }
+    } catch (err) {
+      alert('Error clearing call logs: ' + err.message);
+    } finally {
+      setIsClearing(false);
+    }
+  };
+
   useEffect(() => {
     fetchCallLogs();
 
@@ -111,6 +142,25 @@ function CallLogs() {
     }
   };
 
+  const renderStatusBadge = (rawStatus) => {
+    const status = (rawStatus || 'completed').toLowerCase();
+    let label = status;
+
+    if (status === 'completed') label = '✓ Completed';
+    else if (status === 'queued') label = '⏳ Queued';
+    else if (status === 'initiated' || status === 'ringing') label = '📞 Initiated';
+    else if (status === 'in-progress') label = '🗣️ In Progress';
+    else if (status === 'failed') label = '✕ Failed';
+    else if (status === 'busy') label = '🚫 Busy';
+    else if (status === 'no-answer') label = '📵 No Answer';
+
+    return (
+      <span className={`status-badge call-status ${status}`}>
+        {label}
+      </span>
+    );
+  };
+
   return (
     <div className="call-logs-page">
       <div className="call-logs-card">
@@ -122,14 +172,25 @@ function CallLogs() {
               Monitor all outgoing calls made by FarmCall.
             </p>
           </div>
-          <button
-            className="refresh-btn"
-            onClick={() => fetchCallLogs(true)}
-            disabled={isRefreshing || loading}
-          >
-            <span className={`refresh-icon ${isRefreshing ? 'spin' : ''}`}>🔄</span>
-            {isRefreshing ? 'Refreshing...' : 'Refresh'}
-          </button>
+          <div className="call-logs-actions">
+            {logs.length > 0 && (
+              <button
+                className="clear-logs-btn"
+                onClick={handleClearLogs}
+                disabled={isClearing || loading}
+              >
+                🗑️ {isClearing ? 'Clearing...' : 'Clear Logs'}
+              </button>
+            )}
+            <button
+              className="refresh-btn"
+              onClick={() => fetchCallLogs(true)}
+              disabled={isRefreshing || loading}
+            >
+              <span className={`refresh-icon ${isRefreshing ? 'spin' : ''}`}>🔄</span>
+              {isRefreshing ? 'Refreshing...' : 'Refresh'}
+            </button>
+          </div>
         </div>
 
         {/* Sub-header: Last Updated Timestamp Bar */}
@@ -174,7 +235,6 @@ function CallLogs() {
               </thead>
               <tbody>
                 {logs.map((log, index) => {
-                  const status = (log.call_status || log.status || 'completed').toLowerCase();
                   const smsStatus = (log.sms_status || 'not_required').toLowerCase();
                   return (
                     <tr key={log._id || index}>
@@ -185,9 +245,7 @@ function CallLogs() {
                         {log.phone_number || log.phoneNumber || 'N/A'}
                       </td>
                       <td>
-                        <span className={`status-badge call-status ${status}`}>
-                          {status === 'completed' ? '✓ Completed' : status}
-                        </span>
+                        {renderStatusBadge(log.call_status || log.status)}
                       </td>
                       <td className="duration-cell">
                         {formatDuration(log.call_duration || log.duration)}
@@ -196,13 +254,15 @@ function CallLogs() {
                         <span className={`status-badge sms-status ${smsStatus}`}>
                           {smsStatus === 'delivered'
                             ? '💬 Delivered'
+                            : smsStatus === 'pending'
+                            ? '⏳ Pending'
                             : smsStatus === 'not_required'
                             ? '— Not Required'
                             : '✕ Failed'}
                         </span>
                       </td>
                       <td className="date-cell">
-                        {formatDate(log.createdAt || log.date || log.timestamp)}
+                        {formatDate(log.call_date_time || log.createdAt || log.date || log.timestamp)}
                       </td>
                     </tr>
                   );
