@@ -43,10 +43,18 @@ function Contact() {
       return;
     }
 
+    const getApiBase = () => {
+      const hostname = window.location.hostname;
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'http://localhost:3000';
+      }
+      return 'https://farmcall-project-1.onrender.com';
+    };
+
     setContactStatus({ submitting: true, success: null, error: null });
 
     try {
-      const apiBase = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
+      const apiBase = getApiBase();
       const response = await fetch(`${apiBase}/api/contact`, {
         method: 'POST',
         headers: {

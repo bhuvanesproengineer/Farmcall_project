@@ -28,9 +28,13 @@ function TestCall() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let finalValue = value;
+    if (name === 'phoneNumber') {
+      finalValue = value.replace(/\D/g, '').slice(0, 10);
+    }
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: finalValue,
     }));
 
     if (errors[name]) {
@@ -75,11 +79,11 @@ function TestCall() {
     }
 
     // 6. Phone Number
-    const phoneClean = formData.phoneNumber.replace(/\s+/g, '');
+    const phoneClean = formData.phoneNumber ? formData.phoneNumber.replace(/\D/g, '') : '';
     if (!phoneClean) {
       newErrors.phoneNumber = 'Phone Number is required.';
-    } else if (!/^(\+91)?[6-9]\d{9}$/.test(phoneClean)) {
-      newErrors.phoneNumber = 'Enter a valid 10-digit phone number (e.g. 9876543210).';
+    } else if (phoneClean.length !== 10 || !/^[6-9]\d{9}$/.test(phoneClean)) {
+      newErrors.phoneNumber = 'Enter a valid 10-digit phone number starting with 6-9.';
     }
 
     // 7. State
@@ -253,7 +257,8 @@ function TestCall() {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                placeholder="e.g. +91 9876543210"
+                placeholder="e.g. 9876543210"
+                maxLength={10}
                 value={formData.phoneNumber}
                 onChange={handleChange}
               />

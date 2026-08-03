@@ -117,9 +117,13 @@ function Farmers() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let finalValue = value;
+    if (name === 'phoneNumber') {
+      finalValue = value.replace(/\D/g, '').slice(0, 10);
+    }
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: finalValue,
     }));
     if (formErrors[name]) {
       setFormErrors((prev) => ({
@@ -156,11 +160,11 @@ function Farmers() {
       errors.pincode = 'Pincode must be a 6-digit number.';
     }
 
-    const phoneClean = formData.phoneNumber.replace(/\s+/g, '');
+    const phoneClean = formData.phoneNumber ? formData.phoneNumber.replace(/\D/g, '') : '';
     if (!phoneClean) {
       errors.phoneNumber = 'Phone Number is required.';
-    } else if (!/^(\+91)?[6-9]\d{9}$/.test(phoneClean)) {
-      errors.phoneNumber = 'Enter a valid 10-digit phone number.';
+    } else if (phoneClean.length !== 10 || !/^[6-9]\d{9}$/.test(phoneClean)) {
+      errors.phoneNumber = 'Enter a valid 10-digit phone number starting with 6-9.';
     }
 
     if (!formData.state) {
@@ -470,7 +474,8 @@ function Farmers() {
                   <input
                     type="tel"
                     name="phoneNumber"
-                    placeholder="e.g. 6302465126"
+                    placeholder="e.g. 9876543210"
+                    maxLength={10}
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                   />
