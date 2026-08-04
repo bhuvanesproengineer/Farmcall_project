@@ -6,8 +6,6 @@ export const callAllFarmers = async (farmers, username) => {
         return;
     }
 
-    const promises = [];
-
     for (const farmer of farmers) {
         // Convert Mongoose document to a plain JavaScript object
         const farmerData = farmer && typeof farmer.toObject === 'function' 
@@ -45,12 +43,10 @@ export const callAllFarmers = async (farmers, username) => {
             })
         };
 
-        promises.push(
-            getFarmcall(req, res).catch(err => {
-                console.error(`[callAllFarmers] Exception processing call for ${farmerData.farmerName}:`, err.message || err);
-            })
-        );
+        try {
+            await getFarmcall(req, res);
+        } catch (err) {
+            console.error(`[callAllFarmers] Exception processing call for ${farmerData.farmerName}:`, err.message || err);
+        }
     }
-
-    await Promise.all(promises);
 };
